@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Card from "antd/es/card";
 
-const MetricCardStyled = styled(Card)`
+const VizCardStyled = styled(Card)`
   height: 100%;
   width: 100%;
   border-radius: 5px;
@@ -17,13 +17,17 @@ const MetricCardStyled = styled(Card)`
   }
 
   .ant-card-body {
-    padding: 12px 24px 28px 24px;
+    padding: 0px 15px 15px;
   }
 
   :hover {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
       rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   }
+
+  .divider {
+    color: transparent;
+  }
 `;
 
-export default MetricCardStyled;
+export default VizCardStyled;
