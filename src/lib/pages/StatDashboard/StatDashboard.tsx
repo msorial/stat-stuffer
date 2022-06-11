@@ -17,9 +17,10 @@ import {
 import { StyledRow } from "./StatDashboardStyles";
 import MetricCard from "../../../components/MetricCard/MetricCard";
 import VizCard from "../../../components/VizCard/VizCard";
+import { useGetPlayerByIdQuery } from "../../../app/API/Stats";
 
 const StatDashboard: React.FC = () => {
-  const data = [
+  const PlayerData = [
     {
       name: "Lebron James",
       uv: 4000,
@@ -56,6 +57,9 @@ const StatDashboard: React.FC = () => {
   const assistRandom = Math.floor(Math.random() * 14);
   const reboundRandom = Math.floor(Math.random() * 15);
   const blockRandom = Math.floor(Math.random() * 5);
+
+  const { data, error, isLoading } = useGetPlayerByIdQuery("Lebron");
+  console.log(data);
 
   return (
     <>
@@ -109,7 +113,7 @@ const StatDashboard: React.FC = () => {
               <AreaChart
                 height={300}
                 width={400}
-                data={data}
+                data={PlayerData}
                 margin={{
                   top: 10,
                   right: 30,
