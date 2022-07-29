@@ -1,15 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { statsApi } from "./API/Stats";
+import playerSlice from "./reducers/playerSlice";
 
 export const store = configureStore({
   reducer: {
-    [statsApi.reducerPath]: statsApi.reducer,
+    playerSlice,
   },
-  // Adding the api middleware enables caching, invalidation, polling,
-  // and other useful features of `rtk-query`.
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(statsApi.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

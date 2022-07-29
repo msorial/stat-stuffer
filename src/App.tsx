@@ -6,9 +6,9 @@ import Layout from "antd/es/layout";
 
 import StatDasboard from "./lib/pages/StatDashboard/StatDashboard";
 import PrizePicksDashboard from "./lib/pages/PrizePicksDashboard/PrizePicksDashboard";
-import Sidebar from "./components/Sidebar/Sidebar";
-import PageFooter from "./components/PageFooter/PageFooter";
-import DashboardHeader from "./components/DashboardHeader/DashboardHeader";
+import Sidebar from "./components/Layout/Sidebar/Sidebar";
+import Footer from "./components/Layout/Footer/Footer";
+import Header from "./components/Layout/Header/Header";
 
 const { Content } = Layout;
 
@@ -18,7 +18,7 @@ const App: React.FC = () => {
       <Layout style={{ minHeight: "100vh" }}>
         <Sidebar />
         <Layout className="site-layout">
-          <DashboardHeader />
+          <Header />
           <Content style={{ margin: "0 16px" }}>
             <Routes>
               <Route path="/" element={<StatDasboard />} />
@@ -28,7 +28,7 @@ const App: React.FC = () => {
               />
             </Routes>
           </Content>
-          <PageFooter />
+          <Footer />
         </Layout>
       </Layout>
     </Router>

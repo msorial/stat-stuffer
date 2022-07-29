@@ -5,8 +5,8 @@ import Statistic from "antd/es/statistic";
 import PageHeader from "antd/es/page-header";
 
 import { StyledRow } from "./PrizePicksDashboardStyles";
-import MetricCard from "../../../components/MetricCard/MetricCard";
-import VizCard from "../../../components/VizCard/VizCard";
+import MetricCard from "../../../components/Dashboard/MetricCard/MetricCard";
+import VizCard from "../../../components/Dashboard/VizCard/VizCard";
 import HeatMap from "@uiw/react-heat-map";
 // import Tooltip from "@uiw/react-tooltip";
 import Tooltip from "antd/es/tooltip";
@@ -34,20 +34,12 @@ const PrizePicksDashboard: React.FC = () => {
       />
       <StyledRow justify="center" gutter={[24, 24]}>
         <Col xs={24} sm={24} lg={12} xl={12}>
-          <MetricCard
-            title="Season Percentage"
-            bordered={false}
-            player="Kevin Durant"
-          >
+          <MetricCard title="Season Percentage" player="Kevin Durant">
             <Statistic value={pointRandom} style={{ padding: 0 }} />
           </MetricCard>
         </Col>
         <Col xs={24} sm={24} lg={12} xl={12}>
-          <MetricCard
-            title="Last 5 Percentage"
-            bordered={false}
-            player="Chris Paul"
-          >
+          <MetricCard title="Last 5 Percentage" player="Chris Paul">
             <Statistic value={assistRandom} />
           </MetricCard>
         </Col>

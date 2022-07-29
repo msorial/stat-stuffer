@@ -3,6 +3,7 @@ import React from "react";
 import Col from "antd/es/col";
 import Statistic from "antd/es/statistic";
 import PageHeader from "antd/es/page-header";
+import Tag from "antd/es/tag";
 
 import {
   AreaChart,
@@ -15,11 +16,13 @@ import {
 } from "recharts";
 
 import { StyledRow } from "./StatDashboardStyles";
-import MetricCard from "../../../components/MetricCard/MetricCard";
-import VizCard from "../../../components/VizCard/VizCard";
-import { useGetPlayerByIdQuery } from "../../../app/API/Stats";
+import MetricCard from "../../../components/Dashboard/MetricCard/MetricCard";
+import VizCard from "../../../components/Dashboard/VizCard/VizCard";
+import { deletePlayer, selectPlayers } from "../../../app/reducers/playerSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const StatDashboard: React.FC = () => {
+  const dispatch = useDispatch();
   const PlayerData = [
     {
       name: "Lebron James",
@@ -56,59 +59,52 @@ const StatDashboard: React.FC = () => {
   const pointRandom = Math.floor(Math.random() * 40);
   const assistRandom = Math.floor(Math.random() * 14);
   const reboundRandom = Math.floor(Math.random() * 15);
-  const blockRandom = Math.floor(Math.random() * 5);
 
-  const { data, error, isLoading } = useGetPlayerByIdQuery("Lebron");
-  console.log(data);
+  const handleDeletePlayer = (id: number) => {
+    dispatch(deletePlayer(id));
+  };
+
+  const playerArray = useSelector(selectPlayers);
+  console.log(playerArray);
 
   return (
     <>
       <PageHeader
         className="site-page-header"
         title={`Daily Stats`}
-        // subTitle={date.toLocaleDateString()}
+        subTitle={playerArray.map((player) => {
+          return (
+            <Tag
+              key={player.id}
+              closable
+              onClose={() => handleDeletePlayer(player.id)}
+            >
+              {player.firstName} {player.lastName}
+            </Tag>
+          );
+        })}
       />
       <StyledRow justify="center" gutter={[24, 24]}>
-        <Col xs={24} sm={24} lg={12} xl={6}>
-          <MetricCard
-            title="Points Leader"
-            bordered={false}
-            player="Kevin Durant"
-          >
+        <Col xs={24} sm={24} lg={12} xl={8}>
+          <MetricCard title="Points Leader" player="Kevin Durant">
             <Statistic value={pointRandom} style={{ padding: 0 }} />
           </MetricCard>
         </Col>
-        <Col xs={24} sm={24} lg={12} xl={6}>
-          <MetricCard
-            title="Assists Leader"
-            bordered={false}
-            player="Chris Paul"
-          >
+        <Col xs={24} sm={24} lg={12} xl={8}>
+          <MetricCard title="Assists Leader" player="Chris Paul">
             <Statistic value={assistRandom} />
           </MetricCard>
         </Col>
-        <Col xs={24} sm={24} lg={12} xl={6}>
-          <MetricCard
-            title="Rebounds Leader"
-            bordered={false}
-            player="Nikola Jokic"
-          >
+        <Col xs={24} sm={24} lg={12} xl={8}>
+          <MetricCard title="Rebounds Leader" player="Joel Embiid">
             <Statistic value={reboundRandom} />
           </MetricCard>
         </Col>
-        <Col xs={24} sm={24} lg={12} xl={6}>
-          <MetricCard
-            title="Blocks Leader"
-            bordered={false}
-            player="Joel Embiid"
-          >
-            <Statistic value={blockRandom} />
-          </MetricCard>
-        </Col>
       </StyledRow>
+
       <StyledRow justify="center" gutter={[24, 24]}>
         <Col xs={24} sm={24} lg={24} xl={12}>
-          <VizCard title="FG% Chart" bordered={false}>
+          <VizCard title="Grouped Stats" bordered={false}>
             <ResponsiveContainer width={"99%"} aspect={3}>
               <AreaChart
                 height={300}
@@ -141,20 +137,16 @@ const StatDashboard: React.FC = () => {
           </VizCard>
         </Col>
         <Col xs={24} sm={24} lg={24} xl={12}>
-          <VizCard title="Points Chart" bordered={false}>
+          <VizCard title="Shooting Percentages" bordered={false}>
             <Statistic value={500} />
           </VizCard>
         </Col>
       </StyledRow>
+
       <StyledRow justify="center" gutter={[24, 24]}>
-        <Col xs={24} sm={24} lg={24} xl={12}>
-          <VizCard title="Chart" bordered={false}>
+        <Col xs={24} sm={24} lg={24} xl={24}>
+          <VizCard title="Stats Table" bordered={false}>
             <Statistic value={500} style={{ padding: 0 }} />
-          </VizCard>
-        </Col>
-        <Col xs={24} sm={24} lg={24} xl={12}>
-          <VizCard title="Chart" bordered={false}>
-            <Statistic value={500} />
           </VizCard>
         </Col>
       </StyledRow>

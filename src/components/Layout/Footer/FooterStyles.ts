@@ -3,7 +3,7 @@ import Layout from "antd/es/layout";
 
 const { Footer } = Layout;
 
-const PageFooterStyled = styled(Footer)`
+const StyledFooter = styled(Footer)`
   text-align: center;
   background-color: #ffffff;
   padding: 15px 40px;
@@ -29,4 +29,4 @@ const PageFooterStyled = styled(Footer)`
   }
 `;
 
-export default PageFooterStyled;
+export default StyledFooter;

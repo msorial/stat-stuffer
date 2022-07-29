@@ -7,12 +7,12 @@ import {
   LinkedinOutlined,
 } from "@ant-design/icons";
 
-import { ReactComponent as Logo } from "../../assets/logo/logo.svg";
-import PageFooterStyled from "./PageFooterStyles";
+import { ReactComponent as Logo } from "../../../assets/logo/logo.svg";
+import StyledFooter from "./FooterStyles";
 
-const PageFooter: React.FC = () => {
+const Footer: React.FC = () => {
   return (
-    <PageFooterStyled>
+    <StyledFooter>
       <Row gutter={[24, 16]} align="middle">
         <Col flex={4} style={{ textAlign: "left" }}>
           <Logo />
@@ -34,8 +34,8 @@ const PageFooter: React.FC = () => {
           </a>
         </Col>
       </Row>
-    </PageFooterStyled>
+    </StyledFooter>
   );
 };
 
-export default PageFooter;
+export default Footer;
