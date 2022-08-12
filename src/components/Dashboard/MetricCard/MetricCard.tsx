@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-
 import MetricCardStyled from "./MetricCardStyles";
 
 interface MetricCardProps {

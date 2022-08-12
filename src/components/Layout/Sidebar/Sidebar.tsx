@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Menu from "antd/es/menu";
-import StyledSider from "./SidebarStyles";
 import { FireOutlined, LineChartOutlined } from "@ant-design/icons";
+import Menu from "antd/es/menu";
 import { Link } from "react-router-dom";
+import StyledSider from "./SidebarStyles";
 
 const Sidebar: React.FC = () => {
   const [collapsed, setCollapsed] = useState(true);

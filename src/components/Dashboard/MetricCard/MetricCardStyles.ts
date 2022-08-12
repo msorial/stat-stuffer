@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import Card from "antd/es/card";
+import styled from "styled-components";
 
 const MetricCardStyled = styled(Card)`
   height: 100%;

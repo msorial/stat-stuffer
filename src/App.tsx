@@ -1,14 +1,12 @@
 import React from "react";
 import "./App.css";
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "antd/es/layout";
-
-import StatDasboard from "./lib/pages/StatDashboard/StatDashboard";
-import PrizePicksDashboard from "./lib/pages/PrizePicksDashboard/PrizePicksDashboard";
-import Sidebar from "./components/Layout/Sidebar/Sidebar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "./components/Layout/Footer/Footer";
 import Header from "./components/Layout/Header/Header";
+import Sidebar from "./components/Layout/Sidebar/Sidebar";
+import PrizePicksDashboard from "./lib/pages/PrizePicksDashboard/PrizePicksDashboard";
+import StatDasboard from "./lib/pages/StatDashboard/StatDashboard";
 
 const { Content } = Layout;
 

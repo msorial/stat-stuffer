@@ -1,12 +1,11 @@
 import React from "react";
-import Row from "antd/es/row";
-import Col from "antd/es/col";
 import {
   GithubOutlined,
   GoogleOutlined,
   LinkedinOutlined,
 } from "@ant-design/icons";
-
+import Col from "antd/es/col";
+import Row from "antd/es/row";
 import { ReactComponent as Logo } from "../../../assets/logo/logo.svg";
 import StyledFooter from "./FooterStyles";
 

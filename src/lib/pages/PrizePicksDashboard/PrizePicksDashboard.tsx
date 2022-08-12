@@ -1,15 +1,13 @@
 import React from "react";
-
+import HeatMap from "@uiw/react-heat-map";
 import Col from "antd/es/col";
-import Statistic from "antd/es/statistic";
 import PageHeader from "antd/es/page-header";
-
-import { StyledRow } from "./PrizePicksDashboardStyles";
+import Statistic from "antd/es/statistic";
+import Tooltip from "antd/es/tooltip";
 import MetricCard from "../../../components/Dashboard/MetricCard/MetricCard";
 import VizCard from "../../../components/Dashboard/VizCard/VizCard";
-import HeatMap from "@uiw/react-heat-map";
+import { StyledRow } from "./PrizePicksDashboardStyles";
 // import Tooltip from "@uiw/react-tooltip";
-import Tooltip from "antd/es/tooltip";
 
 const PrizePicksDashboard: React.FC = () => {
   const value = [

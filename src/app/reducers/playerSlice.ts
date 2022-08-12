@@ -9,15 +9,32 @@ interface PlayerProps {
   id: number;
   firstName: string;
   lastName: string;
+
+  games_played: number;
+  season: number;
+  min: string;
+  fgm: number;
+  fga: number;
+  fg3m: number;
+  fg3a: number;
+  ftm: number;
+  fta: number;
+  oreb: number;
+  dreb: number;
+  reb: number;
+  ast: number;
+  stl: number;
+  blk: number;
+  turnover: number;
+  pf: number;
+  pts: number;
+  fg_pct: number;
+  fg3_pct: number;
+  ft_pct: number;
 }
 
 const initialState: PlayerSliceState = {
-  players: [
-    { id: 237, firstName: "LeBron", lastName: "James" },
-    { id: 490, firstName: "Trae", lastName: "Young" },
-    { id: 132, firstName: "Luka", lastName: "Doncic" },
-    { id: 192, firstName: "James", lastName: "Harden" },
-  ],
+  players: [],
 };
 
 export const playerSlice = createSlice({
@@ -25,9 +42,16 @@ export const playerSlice = createSlice({
   initialState,
   reducers: {
     addPlayer: (state, action: PayloadAction<PlayerProps>) => {
+      const playerIndex = state.players.findIndex(
+        (player) => player.id === action.payload.id
+      ); // * -1 = Player not found in array
+
       return {
         ...state,
-        players: [...state.players, action.payload],
+        players:
+          playerIndex === -1
+            ? [...state.players, action.payload]
+            : [...state.players],
       };
     },
     deletePlayer: (state, action) => {
