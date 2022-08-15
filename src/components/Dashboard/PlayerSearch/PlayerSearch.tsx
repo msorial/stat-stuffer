@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { SearchOutlined } from "@ant-design/icons";
-import { Button, DatePicker, Form, Input, message } from "antd";
-import moment from "moment";
-import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import { addPlayer } from "../../../app/reducers/playerSlice";
+import React, { useEffect, useState } from 'react';
+import { SearchOutlined } from '@ant-design/icons';
+import { Button, DatePicker, Form, Input, message } from 'antd';
+import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { addPlayer } from '../../../app/reducers/playerSlice';
 
 const StyledInput = styled(Input)`
   width: 200px;
@@ -18,7 +18,7 @@ const StyledDatePick = styled(DatePicker)`
 
 const PlayerSearch: React.FC = () => {
   const dispatch = useDispatch();
-  const [playerName, setPlayerName] = useState<string>("");
+  const [playerName, setPlayerName] = useState<string>('');
   const [season, setSeason] = useState<number>();
   const [form] = Form.useForm();
 
@@ -27,9 +27,9 @@ const PlayerSearch: React.FC = () => {
     season: { _d: moment.MomentInput };
   }) => {
     const playerNameInput = values.playerName;
-    const seasonInput = moment(values.season._d).format("YYYY");
+    const seasonInput = moment(values.season._d).format('YYYY');
 
-    if (playerNameInput !== "" && seasonInput !== undefined) {
+    if (playerNameInput !== '' && seasonInput !== undefined) {
       setPlayerName(playerNameInput);
       setSeason(parseInt(seasonInput));
     }
@@ -38,11 +38,11 @@ const PlayerSearch: React.FC = () => {
   };
 
   const onFinishFailed = () => {
-    message.error("This is an error message");
+    message.error('This is an error message');
   };
 
   useEffect(() => {
-    if (playerName !== "" && season !== undefined) {
+    if (playerName !== '' && season !== undefined) {
       const fetchData = async () => {
         const playerInfo = await fetch(
           `https://www.balldontlie.io/api/v1/players/?search=${playerName}`
@@ -57,6 +57,7 @@ const PlayerSearch: React.FC = () => {
             id: playerInfo.data[0].id,
             firstName: playerInfo.data[0].first_name,
             lastName: playerInfo.data[0].last_name,
+            team: playerInfo.data[0].team.abbreviation,
 
             games_played: statsInfo.data[0].games_played,
             season: statsInfo.data[0].season,
@@ -96,7 +97,7 @@ const PlayerSearch: React.FC = () => {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
       layout="inline"
-      requiredMark={"optional"}
+      requiredMark={'optional'}
     >
       <Form.Item name="playerName">
         <StyledInput placeholder="Search Player" allowClear />

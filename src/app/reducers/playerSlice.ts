@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
 interface PlayerSliceState {
   players: PlayerProps[];
@@ -9,6 +9,7 @@ interface PlayerProps {
   id: number;
   firstName: string;
   lastName: string;
+  team: string;
 
   games_played: number;
   season: number;
@@ -38,7 +39,7 @@ const initialState: PlayerSliceState = {
 };
 
 export const playerSlice = createSlice({
-  name: "player",
+  name: 'player',
   initialState,
   reducers: {
     addPlayer: (state, action: PayloadAction<PlayerProps>) => {

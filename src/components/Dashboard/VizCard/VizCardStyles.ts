@@ -1,5 +1,5 @@
-import Card from "antd/es/card";
-import styled from "styled-components";
+import Card from 'antd/es/card';
+import styled from 'styled-components';
 
 const VizCardStyled = styled(Card)`
   height: 100%;

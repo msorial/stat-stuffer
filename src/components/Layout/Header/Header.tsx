@@ -1,7 +1,7 @@
-import React from "react";
-import Affix from "antd/es/affix";
-import PlayerSearch from "../../Dashboard/PlayerSearch/PlayerSearch";
-import StyledHeader from "./HeaderStyles";
+import React from 'react';
+import Affix from 'antd/es/affix';
+import PlayerSearch from '../../Dashboard/PlayerSearch/PlayerSearch';
+import StyledHeader from './HeaderStyles';
 
 const Header: React.FC = () => {
   return (

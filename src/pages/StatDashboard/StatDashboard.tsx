@@ -1,12 +1,12 @@
-import React from "react";
-import Col from "antd/es/col";
-import Statistic from "antd/es/statistic";
-import DashboardHeader from "../../../components/Dashboard/DashboardHeader/DashboardHeader";
-import VizCard from "../../../components/Dashboard/VizCard/VizCard";
-import AssistsLeader from "../../../components/Visualizations/Cards/AssistsLeader";
-import PointsLeader from "../../../components/Visualizations/Cards/PointsLeader";
-import ReboundsLeader from "../../../components/Visualizations/Cards/ReboundsLeader";
-import { StyledRow } from "./StatDashboardStyles";
+import React from 'react';
+import Col from 'antd/es/col';
+import Statistic from 'antd/es/statistic';
+import DashboardHeader from '../../components/Dashboard/DashboardHeader/DashboardHeader';
+import VizCard from '../../components/Dashboard/VizCard/VizCard';
+import AssistsLeader from '../../components/Visualizations/Cards/AssistsLeader';
+import PointsLeader from '../../components/Visualizations/Cards/PointsLeader';
+import ReboundsLeader from '../../components/Visualizations/Cards/ReboundsLeader';
+import { StyledRow } from './StatDashboardStyles';
 
 const StatDashboard: React.FC = () => {
   return (

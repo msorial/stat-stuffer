@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 import {
   GithubOutlined,
   GoogleOutlined,
   LinkedinOutlined,
-} from "@ant-design/icons";
-import Col from "antd/es/col";
-import Row from "antd/es/row";
-import { ReactComponent as Logo } from "../../../assets/logo/logo.svg";
-import StyledFooter from "./FooterStyles";
+} from '@ant-design/icons';
+import Col from 'antd/es/col';
+import Row from 'antd/es/row';
+import { ReactComponent as Logo } from '../../../assets/logo/logo.svg';
+import StyledFooter from './FooterStyles';
 
 const Footer: React.FC = () => {
   return (
     <StyledFooter>
       <Row gutter={[24, 16]} align="middle">
-        <Col flex={4} style={{ textAlign: "left" }}>
+        <Col flex={4} style={{ textAlign: 'left' }}>
           <Logo />
         </Col>
 

@@ -1,5 +1,5 @@
-import React from "react";
-import StyledInput from "./InputStyles";
+import React from 'react';
+import StyledInput from './InputStyles';
 
 interface InputProps {
   placeholder: string;

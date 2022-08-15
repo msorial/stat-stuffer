@@ -1,5 +1,5 @@
-import Card from "antd/es/card";
-import styled from "styled-components";
+import Card from 'antd/es/card';
+import styled from 'styled-components';
 
 const MetricCardStyled = styled(Card)`
   height: 100%;
@@ -7,12 +7,12 @@ const MetricCardStyled = styled(Card)`
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
     0 15px 40px rgba(166, 173, 201, 0.2);
-  text-align: center;
-  vertical-align: middle;
+  /* text-align: center; */
+  /* vertical-align: middle; */
 
   .ant-card-head {
     width: 100%;
-    padding: 5px 10px;
+    /* padding: 5px 10px; */
     border-bottom: none;
   }
 
