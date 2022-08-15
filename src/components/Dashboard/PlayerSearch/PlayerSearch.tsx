@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, DatePicker, Form, Input, message } from 'antd';
-import moment from 'moment';
+import { Button, Form, Input, message } from 'antd';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { addPlayer } from '../../../app/reducers/playerSlice';
@@ -11,30 +10,24 @@ const StyledInput = styled(Input)`
   vertical-align: middle;
 `;
 
-const StyledDatePick = styled(DatePicker)`
-  width: 160px;
-  vertical-align: middle;
-`;
-
 const PlayerSearch: React.FC = () => {
   const dispatch = useDispatch();
   const [playerName, setPlayerName] = useState<string>('');
   const [season, setSeason] = useState<number>();
   const [form] = Form.useForm();
 
-  const onFinish = (values: {
-    playerName: string;
-    season: { _d: moment.MomentInput };
-  }) => {
+  const onFinish = (values: { playerName: string; season: number }) => {
     const playerNameInput = values.playerName;
-    const seasonInput = moment(values.season._d).format('YYYY');
+    const seasonInput = values.season;
 
     if (playerNameInput !== '' && seasonInput !== undefined) {
       setPlayerName(playerNameInput);
-      setSeason(parseInt(seasonInput));
+      setSeason(seasonInput);
     }
 
     form.resetFields();
+
+    setInterval(() => setSeason(undefined), 100);
   };
 
   const onFinishFailed = () => {
@@ -42,6 +35,7 @@ const PlayerSearch: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log(season);
     if (playerName !== '' && season !== undefined) {
       const fetchData = async () => {
         const playerInfo = await fetch(
@@ -100,11 +94,15 @@ const PlayerSearch: React.FC = () => {
       requiredMark={'optional'}
     >
       <Form.Item name="playerName">
-        <StyledInput placeholder="Search Player" allowClear />
+        <StyledInput
+          placeholder="Search Player"
+          value={playerName}
+          allowClear
+        />
       </Form.Item>
 
       <Form.Item name="season">
-        <StyledDatePick picker="year" />
+        <StyledInput placeholder="Year" value={season} allowClear />
       </Form.Item>
 
       <Form.Item name="Search">
