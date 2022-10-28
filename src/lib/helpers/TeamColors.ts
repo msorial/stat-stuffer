@@ -133,7 +133,7 @@ export const TeamColors: TeamColorsProps[] = [
   {
     team: 'SAC',
     primaryColor: '#5a2b81',
-    secondaryColor: '#63727a',
+    secondaryColor: '#000000',
   },
   {
     team: 'SAS',

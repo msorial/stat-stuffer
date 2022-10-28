@@ -25,7 +25,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
       bordered={false}
       title={title}
       extra={
-        <Tooltip placement="top" title={'View Season Stats'}>
+        <Tooltip placement="top" title={'View Team Stats'}>
           <div style={{ fontSize: '18px', cursor: 'pointer' }}>{team}</div>
         </Tooltip>
       }

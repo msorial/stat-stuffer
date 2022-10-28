@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Form, Input, message } from 'antd';
+import { AutoComplete, Button, Form, Input, message } from 'antd';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { addPlayer } from '../../../app/reducers/playerSlice';
+import { playerList } from '../../../lib/helpers/PlayerList';
 
 const StyledInput = styled(Input)`
   width: 200px;
@@ -35,7 +36,6 @@ const PlayerSearch: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log(season);
     if (playerName !== '' && season !== undefined) {
       const fetchData = async () => {
         const playerInfo = await fetch(
@@ -89,15 +89,21 @@ const PlayerSearch: React.FC = () => {
       initialValues={{ remember: false }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
-      autoComplete="off"
       layout="inline"
       requiredMark={'optional'}
     >
       <Form.Item name="playerName">
-        <StyledInput
+        <AutoComplete
+          style={{ width: 200 }}
+          listHeight={140}
+          options={playerList}
           placeholder="Search Player"
           value={playerName}
           allowClear
+          filterOption={(inputValue, options) =>
+            options?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !==
+            -1
+          }
         />
       </Form.Item>
 

@@ -26,7 +26,7 @@ const StatDashboard: React.FC = () => {
 
       <StyledRow justify="center" gutter={[24, 24]}>
         <Col xs={24} sm={24} lg={24} xl={12}>
-          <VizCard title="Grouped Stats" bordered={false}>
+          <VizCard title="All Stats" bordered={false}>
             <Statistic value={500} />
           </VizCard>
         </Col>
