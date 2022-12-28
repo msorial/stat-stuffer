@@ -2,9 +2,9 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { UserAddOutlined } from '@ant-design/icons';
 import { RiseOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
-import { selectPlayers } from '../../../app/reducers/playerSlice';
-import { TeamLogos, TeamLogosProps } from '../../../lib/helpers/TeamLogos';
-import MetricCard from '../../Dashboard/MetricCard/MetricCard';
+import { selectPlayers } from '../../app/reducers/playerSlice';
+import { TeamLogos, TeamLogosProps } from '../../lib/constants/TeamLogos';
+import MetricCard from '../Dashboard/MetricCard/MetricCard';
 
 const AssistsLeader: React.FC = () => {
   const playerArray = useSelector(selectPlayers); // * Redux Player Array

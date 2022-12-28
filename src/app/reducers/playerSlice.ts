@@ -10,7 +10,6 @@ interface PlayerProps {
   firstName: string;
   lastName: string;
   team: string;
-
   games_played: number;
   season: number;
   min: string;

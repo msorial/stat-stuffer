@@ -2,32 +2,32 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { UserAddOutlined } from '@ant-design/icons';
 import { RiseOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
-import { selectPlayers } from '../../../app/reducers/playerSlice';
-import { TeamLogos, TeamLogosProps } from '../../../lib/helpers/TeamLogos';
-import MetricCard from '../../Dashboard/MetricCard/MetricCard';
+import { selectPlayers } from '../../app/reducers/playerSlice';
+import { TeamLogos, TeamLogosProps } from '../../lib/constants/TeamLogos';
+import MetricCard from '../Dashboard/MetricCard/MetricCard';
 
-const ReboundsLeader: React.FC = () => {
+const PointsLeader: React.FC = () => {
   const playerArray = useSelector(selectPlayers); // * Redux Player Array
 
-  const [rebLeader, setRebLeader] = useState<string>('Add Players');
-  const [maxReb, setMaxReb] = useState<number>(0);
+  const [ptsLeader, setPtsLeader] = useState<string>('Add Players');
+  const [maxPts, setMaxPts] = useState<number>(0);
   const [maxSzn, setMaxSzn] = useState<number | string>('to see stats');
   const [teamIndex, setTeamIndex] = useState<number>(0);
   const [diffString, setDiffString] = useState<string>('');
 
-  // * Sorted Player Array by Rebounds
+  // * Sorted Player Array by Points
   const sortedPlayerArray = useMemo(
-    () => playerArray.slice().sort((a, b) => b.reb - a.reb),
+    () => playerArray.slice().sort((a, b) => b.pts - a.pts),
     [playerArray]
   );
 
   // TODO: Needs refactoring
   useEffect(() => {
     if (sortedPlayerArray.length > 0) {
-      setRebLeader(
+      setPtsLeader(
         `${sortedPlayerArray[0].firstName} ${sortedPlayerArray[0].lastName}`
       );
-      setMaxReb(sortedPlayerArray[0].reb);
+      setMaxPts(sortedPlayerArray[0].pts);
       setMaxSzn(sortedPlayerArray[0].season);
       setTeamIndex(
         TeamLogos.findIndex(
@@ -41,11 +41,11 @@ const ReboundsLeader: React.FC = () => {
 
       if (sortedPlayerArray.length >= 2) {
         const avgDiff = Number(
-          sortedPlayerArray[0].reb - sortedPlayerArray[1].reb
+          sortedPlayerArray[0].pts - sortedPlayerArray[1].pts
         ).toFixed(1);
 
         setDiffString(
-          `${rebLeader} averaged ${avgDiff} more RPG than ${sortedPlayerArray[1].firstName} ${sortedPlayerArray[1].lastName}`
+          `${ptsLeader} averaged ${avgDiff} more PPG than ${sortedPlayerArray[1].firstName} ${sortedPlayerArray[1].lastName}`
         );
       }
 
@@ -53,15 +53,15 @@ const ReboundsLeader: React.FC = () => {
         setDiffString('');
       }
     } else {
-      setRebLeader('Add Players');
+      setPtsLeader('Add Players');
       setMaxSzn('to see stats');
       setDiffString('');
     }
-  }, [rebLeader, sortedPlayerArray]);
+  }, [ptsLeader, sortedPlayerArray]);
 
   return (
     <MetricCard
-      title="Rebounds Leader"
+      title="Points Leader"
       team={
         sortedPlayerArray.length > 0 ? (
           TeamLogos[teamIndex].logo
@@ -69,12 +69,12 @@ const ReboundsLeader: React.FC = () => {
           <RiseOutlined />
         )
       }
-      player={rebLeader}
+      player={ptsLeader}
       stat={
         sortedPlayerArray.length > 0 ? (
           <>
             <span style={{ fontSize: '32px', paddingRight: '5px' }}>
-              {maxReb}
+              {maxPts}
             </span>
             <span
               style={{
@@ -83,7 +83,7 @@ const ReboundsLeader: React.FC = () => {
                 fontStyle: 'italic',
               }}
             >
-              RPG
+              PPG
             </span>
           </>
         ) : (
@@ -106,4 +106,4 @@ const ReboundsLeader: React.FC = () => {
   );
 };
 
-export default ReboundsLeader;
+export default PointsLeader;

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { AutoComplete, Button, Form, Input, message } from 'antd';
+import { AutoComplete, Button, Col, Form, Input, message, Row } from 'antd';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { addPlayer } from '../../../app/reducers/playerSlice';
-import { playerList } from '../../../lib/helpers/PlayerList';
+import { playerList } from '../../../lib/constants/PlayerList';
 
 const StyledInput = styled(Input)`
-  width: 200px;
   vertical-align: middle;
 `;
 
@@ -92,33 +91,42 @@ const PlayerSearch: React.FC = () => {
       layout="inline"
       requiredMark={'optional'}
     >
-      <Form.Item name="playerName">
-        <AutoComplete
-          style={{ width: 200 }}
-          listHeight={140}
-          options={playerList}
-          placeholder="Search Player"
-          value={playerName}
-          allowClear
-          filterOption={(inputValue, options) =>
-            options?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !==
-            -1
-          }
-        />
-      </Form.Item>
+      <Row wrap={false}>
+        <Col>
+          <Form.Item name="playerName">
+            <AutoComplete
+              style={{ width: 200 }}
+              listHeight={140}
+              options={playerList}
+              placeholder="Search Player"
+              value={playerName}
+              allowClear
+              filterOption={(inputValue, options) =>
+                options?.value
+                  .toUpperCase()
+                  .indexOf(inputValue.toUpperCase()) !== -1
+              }
+            />
+          </Form.Item>
+        </Col>
 
-      <Form.Item name="season">
-        <StyledInput placeholder="Year" value={season} allowClear />
-      </Form.Item>
+        <Col>
+          <Form.Item name="season">
+            <StyledInput placeholder="Year" value={season} allowClear />
+          </Form.Item>
+        </Col>
 
-      <Form.Item name="Search">
-        <Button
-          type="default"
-          shape="circle"
-          htmlType="submit"
-          icon={<SearchOutlined />}
-        />
-      </Form.Item>
+        <Col>
+          <Form.Item name="Search">
+            <Button
+              type="default"
+              shape="circle"
+              htmlType="submit"
+              icon={<SearchOutlined />}
+            />
+          </Form.Item>
+        </Col>
+      </Row>
     </Form>
   );
 };

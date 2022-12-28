@@ -2,7 +2,7 @@ import Card from 'antd/es/card';
 import styled from 'styled-components';
 
 const VizCardStyled = styled(Card)`
-  height: 100%;
+  height: 400px;
   width: 100%;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
@@ -18,6 +18,8 @@ const VizCardStyled = styled(Card)`
 
   .ant-card-body {
     padding: 0px 15px 15px;
+    height: 80%;
+    width: 100%;
   }
 
   :hover {

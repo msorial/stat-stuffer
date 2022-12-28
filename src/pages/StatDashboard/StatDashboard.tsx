@@ -3,9 +3,10 @@ import Col from 'antd/es/col';
 import Statistic from 'antd/es/statistic';
 import DashboardHeader from '../../components/Dashboard/DashboardHeader/DashboardHeader';
 import VizCard from '../../components/Dashboard/VizCard/VizCard';
-import AssistsLeader from '../../components/Visualizations/Cards/AssistsLeader';
-import PointsLeader from '../../components/Visualizations/Cards/PointsLeader';
-import ReboundsLeader from '../../components/Visualizations/Cards/ReboundsLeader';
+import AssistsLeader from '../../components/Visualizations/AssistsLeader';
+import ParGroupedBar from '../../components/Visualizations/ParGroupedBar';
+import PointsLeader from '../../components/Visualizations/PointsLeader';
+import ReboundsLeader from '../../components/Visualizations/ReboundsLeader';
 import { StyledRow } from './StatDashboardStyles';
 
 const StatDashboard: React.FC = () => {
@@ -26,10 +27,13 @@ const StatDashboard: React.FC = () => {
 
       <StyledRow justify="center" gutter={[24, 24]}>
         <Col xs={24} sm={24} lg={24} xl={12}>
-          <VizCard title="All Stats" bordered={false}>
+          <VizCard title="Shooting Percentages" bordered={false}>
             <Statistic value={500} />
           </VizCard>
+
+          {/* <ParGroupedBar /> */}
         </Col>
+
         <Col xs={24} sm={24} lg={24} xl={12}>
           <VizCard title="Shooting Percentages" bordered={false}>
             <Statistic value={500} />

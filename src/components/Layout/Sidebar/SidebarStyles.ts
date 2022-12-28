@@ -13,7 +13,7 @@ const StyledSider = styled(Sider)`
   .ant-menu-inline-collapsed {
     position: -webkit-sticky;
     position: sticky;
-    top: 55px;
+    top: 65px;
     background-color: #082032;
   }
 
@@ -28,7 +28,7 @@ const StyledSider = styled(Sider)`
   .logo {
     position: -webkit-sticky;
     position: sticky;
-    top: 0px;
+    top: 20px;
   }
 `;
 

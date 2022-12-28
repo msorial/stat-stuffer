@@ -6,8 +6,8 @@ const { Footer } = Layout;
 const StyledFooter = styled(Footer)`
   text-align: center;
   background-color: #ffffff;
-  padding: 15px 40px;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  padding: 10px 30px;
+  border-top: 1px solid #e2e2e2;
   margin: 20px 0px 0px 0px;
 
   a {

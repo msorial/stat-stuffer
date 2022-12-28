@@ -2,7 +2,7 @@ import React from 'react';
 import { Divider, Tag } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePlayer, selectPlayers } from '../../../app/reducers/playerSlice';
-import { TeamColors, TeamColorsProps } from '../../../lib/helpers/TeamColors';
+import { TeamColors, TeamColorsProps } from '../../../lib/constants/TeamColors';
 
 const PlayerRow: React.FC = () => {
   const dispatch = useDispatch();
