@@ -2,7 +2,7 @@ import React from 'react';
 import Col from 'antd/es/col';
 import Statistic from 'antd/es/statistic';
 import DashboardHeader from '../../components/Dashboard/DashboardHeader/DashboardHeader';
-import VizCard from '../../components/Dashboard/VizCard/VizCard';
+import VizCard from '../../components/Reusable/VizCard/VizCard';
 import AssistsLeader from '../../components/Visualizations/AssistsLeader';
 import ParGroupedBar from '../../components/Visualizations/ParGroupedBar';
 import PointsLeader from '../../components/Visualizations/PointsLeader';

@@ -4,11 +4,13 @@ import { RiseOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { selectPlayers } from '../../app/reducers/playerSlice';
 import { TeamLogos, TeamLogosProps } from '../../lib/constants/TeamLogos';
-import MetricCard from '../Dashboard/MetricCard/MetricCard';
+import MetricCard from '../Reusable/MetricCard/MetricCard';
 
 const PointsLeader: React.FC = () => {
   const playerArray = useSelector(selectPlayers); // * Redux Player Array
 
+  // turn all this card information into a state object instead of a bunch
+  // of useStates
   const [ptsLeader, setPtsLeader] = useState<string>('Add Players');
   const [maxPts, setMaxPts] = useState<number>(0);
   const [maxSzn, setMaxSzn] = useState<number | string>('to see stats');
@@ -62,15 +64,15 @@ const PointsLeader: React.FC = () => {
   return (
     <MetricCard
       title="Points Leader"
-      team={
+      teamLogo={
         sortedPlayerArray.length > 0 ? (
           TeamLogos[teamIndex].logo
         ) : (
           <RiseOutlined />
         )
       }
-      player={ptsLeader}
-      stat={
+      playerName={ptsLeader}
+      statistic={
         sortedPlayerArray.length > 0 ? (
           <>
             <span style={{ fontSize: '32px', paddingRight: '5px' }}>

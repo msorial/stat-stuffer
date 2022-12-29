@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import { useSelector } from 'react-redux';
 import { selectPlayers } from '../../app/reducers/playerSlice';
-import VizCard from '../Dashboard/VizCard';
+import VizCard from '../Reusable/VizCard';
 
 const data = [
   {

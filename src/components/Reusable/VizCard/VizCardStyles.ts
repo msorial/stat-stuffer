@@ -5,8 +5,8 @@ const VizCardStyled = styled(Card)`
   height: 400px;
   width: 100%;
   border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
-    0 15px 40px rgba(166, 173, 201, 0.2);
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset,
+    #d3d3d3 0px 0px 0px 1px;
   text-align: center;
   vertical-align: middle;
 
@@ -20,15 +20,6 @@ const VizCardStyled = styled(Card)`
     padding: 0px 15px 15px;
     height: 80%;
     width: 100%;
-  }
-
-  :hover {
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-  }
-
-  .divider {
-    color: transparent;
   }
 `;
 

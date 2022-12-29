@@ -4,7 +4,7 @@ import { RiseOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { selectPlayers } from '../../app/reducers/playerSlice';
 import { TeamLogos, TeamLogosProps } from '../../lib/constants/TeamLogos';
-import MetricCard from '../Dashboard/MetricCard/MetricCard';
+import MetricCard from '../Reusable/MetricCard/MetricCard';
 
 const ReboundsLeader: React.FC = () => {
   const playerArray = useSelector(selectPlayers); // * Redux Player Array
@@ -62,15 +62,15 @@ const ReboundsLeader: React.FC = () => {
   return (
     <MetricCard
       title="Rebounds Leader"
-      team={
+      teamLogo={
         sortedPlayerArray.length > 0 ? (
           TeamLogos[teamIndex].logo
         ) : (
           <RiseOutlined />
         )
       }
-      player={rebLeader}
-      stat={
+      playerName={rebLeader}
+      statistic={
         sortedPlayerArray.length > 0 ? (
           <>
             <span style={{ fontSize: '32px', paddingRight: '5px' }}>

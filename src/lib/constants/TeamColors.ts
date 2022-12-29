@@ -13,7 +13,7 @@ export const TeamColors: TeamColorsProps[] = [
   {
     team: 'BOS',
     primaryColor: '#008348',
-    secondaryColor: '#fab383',
+    secondaryColor: '#f0f0f0',
   },
   {
     team: 'BKN',
