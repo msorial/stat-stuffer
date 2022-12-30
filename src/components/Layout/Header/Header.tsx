@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenuUnfoldOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Affix, Row, Col } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -18,15 +18,23 @@ const Header: React.FC = () => {
       <StyledHeader>
         <Row wrap={false} align="middle" gutter={[20, 8]}>
           <Col>
-            <MenuUnfoldOutlined
-              onClick={() => dispatch(toggleSidebar())}
-              style={{
-                fontSize: '16px',
-                color: '#0574fb',
-                transform: sidebarClosed ? 'rotate(0deg) ' : 'rotate(180deg)',
-                transition: '0.3s',
-              }}
-            />
+            {sidebarClosed ? (
+              <MenuUnfoldOutlined
+                onClick={() => dispatch(toggleSidebar())}
+                style={{
+                  fontSize: '16px',
+                  color: '#0574fb',
+                }}
+              />
+            ) : (
+              <MenuFoldOutlined
+                onClick={() => dispatch(toggleSidebar())}
+                style={{
+                  fontSize: '16px',
+                  color: '#0574fb',
+                }}
+              />
+            )}
           </Col>
           <Col>
             <PlayerSearch />

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const { Sider } = Layout;
 
 const StyledSider = styled(Sider)`
-  background-color: #082032;
+  background-color: #121926;
 
   .ant-menu,
   .ant-menu-root,
@@ -14,19 +14,20 @@ const StyledSider = styled(Sider)`
     position: -webkit-sticky;
     position: sticky;
     top: 65px;
-    background-color: #082032;
+    background-color: #121926;
   }
 
   .ant-menu-item-selected {
-    background-color: #eb344c !important;
+    background-color: #3d424d !important;
   }
 
   .ant-layout-sider-trigger {
-    background-color: #eb344c !important;
+    background-color: #3d424d;
+    position: sticky;
+    bottom: 0;
   }
 
   .logo {
-    position: -webkit-sticky;
     position: sticky;
     top: 20px;
   }
