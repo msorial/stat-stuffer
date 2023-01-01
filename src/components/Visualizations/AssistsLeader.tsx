@@ -1,33 +1,31 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { UserAddOutlined } from '@ant-design/icons';
-import { RiseOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { selectPlayers } from '../../app/reducers/playerSlice';
 import { TeamLogos, TeamLogosProps } from '../../lib/constants/TeamLogos';
 import MetricCard from '../Reusable/MetricCard/MetricCard';
 
-const AssistsLeader: React.FC = () => {
+const ReboundsLeader: React.FC = () => {
   const playerArray = useSelector(selectPlayers); // * Redux Player Array
 
-  const [astLeader, setAstLeader] = useState<string>('Add Players');
-  const [maxAst, setMaxAst] = useState<number>(0);
+  const [rebLeader, setRebLeader] = useState<string>('Add Players');
+  const [maxReb, setMaxReb] = useState<number>(0);
   const [maxSzn, setMaxSzn] = useState<number | string>('to see stats');
   const [teamIndex, setTeamIndex] = useState<number>(0);
   const [diffString, setDiffString] = useState<string>('');
 
-  // * Sorted Player Array by Assists
+  // * Sorted Player Array by Rebounds
   const sortedPlayerArray = useMemo(
-    () => playerArray.slice().sort((a, b) => b.ast - a.ast),
+    () => playerArray.slice().sort((a, b) => b.reb - a.reb),
     [playerArray]
   );
 
   // TODO: Needs refactoring
   useEffect(() => {
     if (sortedPlayerArray.length > 0) {
-      setAstLeader(
+      setRebLeader(
         `${sortedPlayerArray[0].firstName} ${sortedPlayerArray[0].lastName}`
       );
-      setMaxAst(sortedPlayerArray[0].ast);
+      setMaxReb(sortedPlayerArray[0].reb);
       setMaxSzn(sortedPlayerArray[0].season);
       setTeamIndex(
         TeamLogos.findIndex(
@@ -41,11 +39,11 @@ const AssistsLeader: React.FC = () => {
 
       if (sortedPlayerArray.length >= 2) {
         const avgDiff = Number(
-          sortedPlayerArray[0].ast - sortedPlayerArray[1].ast
+          sortedPlayerArray[0].reb - sortedPlayerArray[1].reb
         ).toFixed(1);
 
         setDiffString(
-          `${astLeader} averaged ${avgDiff} more APG than ${sortedPlayerArray[1].firstName} ${sortedPlayerArray[1].lastName}`
+          `${rebLeader} averaged ${avgDiff} more RPG than ${sortedPlayerArray[1].firstName} ${sortedPlayerArray[1].lastName}`
         );
       }
 
@@ -53,28 +51,24 @@ const AssistsLeader: React.FC = () => {
         setDiffString('');
       }
     } else {
-      setAstLeader('Add Players');
+      setRebLeader('Add Players');
       setMaxSzn('to see stats');
       setDiffString('');
     }
-  }, [astLeader, sortedPlayerArray]);
+  }, [rebLeader, sortedPlayerArray]);
 
   return (
     <MetricCard
-      title="Assists Leader"
+      title="Rebounds Leader"
       teamLogo={
-        sortedPlayerArray.length > 0 ? (
-          TeamLogos[teamIndex].logo
-        ) : (
-          <RiseOutlined />
-        )
+        sortedPlayerArray.length > 0 ? TeamLogos[teamIndex].logo : <div>t</div>
       }
-      playerName={astLeader}
+      playerName={rebLeader}
       statistic={
         sortedPlayerArray.length > 0 ? (
           <>
             <span style={{ fontSize: '32px', paddingRight: '5px' }}>
-              {maxAst}
+              {maxReb}
             </span>
             <span
               style={{
@@ -83,11 +77,11 @@ const AssistsLeader: React.FC = () => {
                 fontStyle: 'italic',
               }}
             >
-              APG
+              RPG
             </span>
           </>
         ) : (
-          <UserAddOutlined />
+          <div>t</div>
         )
       }
       season={maxSzn}
@@ -106,4 +100,4 @@ const AssistsLeader: React.FC = () => {
   );
 };
 
-export default AssistsLeader;
+export default ReboundsLeader;

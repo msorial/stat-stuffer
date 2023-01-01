@@ -1,15 +1,24 @@
+import { ReactNode } from 'react';
 import { FireOutlined, LineChartOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
 
-export const MenuItems = [
+interface MenuItemProps {
+  icon: ReactNode;
+  label: string;
+  route: string;
+  description: string;
+}
+
+export const menuItems: MenuItemProps[] = [
   {
-    label: <Link to="/stats-overview">Stat Overview</Link>,
-    key: 'stat-overview',
     icon: <LineChartOutlined />,
+    label: 'Average Overview',
+    route: '/average-overview',
+    description: 'View favorite players averages',
   },
   {
-    label: <Link to="/prizepicks">Prize Picks</Link>,
-    key: 'prize-picks',
     icon: <FireOutlined />,
+    label: 'Prize Picker',
+    route: '/prize-picker',
+    description: 'Use data to win your prizepicks',
   },
 ];

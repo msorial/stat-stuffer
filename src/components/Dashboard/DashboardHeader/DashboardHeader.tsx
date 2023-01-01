@@ -1,5 +1,4 @@
 import React from 'react';
-import { PageHeader } from 'antd';
 import PlayerRow from '../PlayerRow';
 
 interface DashboardHeaderProps {
@@ -7,13 +6,7 @@ interface DashboardHeaderProps {
 }
 
 const DashboardHeader: React.FC<DashboardHeaderProps> = ({ title }) => {
-  return (
-    <PageHeader
-      className="site-page-header"
-      title={title}
-      subTitle={<PlayerRow />}
-    />
-  );
+  return <div>t</div>;
 };
 
 export default DashboardHeader;

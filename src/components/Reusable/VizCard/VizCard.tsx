@@ -12,11 +12,7 @@ const VizCard: React.FC<MetricCardProps> = ({
   bordered,
   children,
 }: MetricCardProps) => {
-  return (
-    <VizCardStyled bordered={bordered} title={title}>
-      {children}
-    </VizCardStyled>
-  );
+  return <div>test</div>;
 };
 
 export default VizCard;

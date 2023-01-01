@@ -7,9 +7,9 @@ const RootRouter: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<DashboardLayout />}>
-        <Route path="stats-overview" element={<StatDashboard />} />
-        <Route path="prizepicks" element={<PrizePicksDashboard />} />
-        <Route path="/" element={<Navigate replace to="/stats-overview" />} />
+        <Route path="average-overview" element={<StatDashboard />} />
+        <Route path="prize-picker" element={<PrizePicksDashboard />} />
+        <Route path="/" element={<Navigate replace to="/average-overview" />} />
       </Route>
     </Routes>
   );

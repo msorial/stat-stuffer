@@ -1,13 +1,11 @@
 import React from 'react';
-import { LoadingOutlined } from '@ant-design/icons';
-import { Result } from 'antd';
-import PrizePicksDashboardStyles from './PrizePicksDashboardStyles';
+import { Center, Loader } from '@mantine/core';
 
 const PrizePicksDashboard: React.FC = () => {
   return (
-    <PrizePicksDashboardStyles>
-      <Result icon={<LoadingOutlined />} title="Coming Soon!" />
-    </PrizePicksDashboardStyles>
+    <Center sx={{ height: '100%' }}>
+      <Loader size="lg" variant="dots" color="red" />
+    </Center>
   );
 };
 

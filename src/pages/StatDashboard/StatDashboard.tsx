@@ -1,6 +1,6 @@
 import React from 'react';
-import Col from 'antd/es/col';
-import Statistic from 'antd/es/statistic';
+import { Grid, Text } from '@mantine/core';
+import { Card, Image, Badge, Button, Group } from '@mantine/core';
 import DashboardHeader from '../../components/Dashboard/DashboardHeader/DashboardHeader';
 import VizCard from '../../components/Reusable/VizCard/VizCard';
 import AssistsLeader from '../../components/Visualizations/AssistsLeader';
@@ -11,44 +11,176 @@ import { StyledRow } from './StatDashboardStyles';
 
 const StatDashboard: React.FC = () => {
   return (
-    <>
-      <DashboardHeader title="Player Averages Dashboard" />
-      <StyledRow justify="center" gutter={[24, 24]}>
-        <Col xs={24} sm={24} lg={12} xl={8}>
-          <PointsLeader />
-        </Col>
-        <Col xs={24} sm={24} lg={12} xl={8}>
-          <AssistsLeader />
-        </Col>
-        <Col xs={24} sm={24} lg={12} xl={8}>
-          <ReboundsLeader />
-        </Col>
-      </StyledRow>
+    <Grid grow>
+      <Grid.Col lg={4} md={6} sm={6} xs={12}>
+        <Card shadow="sm" p="lg" radius="md" withBorder>
+          <Card.Section>
+            <Image
+              src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
+              height={160}
+              alt="Norway"
+            />
+          </Card.Section>
 
-      <StyledRow justify="center" gutter={[24, 24]}>
-        <Col xs={24} sm={24} lg={24} xl={12}>
-          <VizCard title="Shooting Percentages" bordered={false}>
-            <Statistic value={500} />
-          </VizCard>
+          <Group position="apart" mt="md" mb="xs">
+            <Text weight={500}>Norway Fjord Adventures</Text>
+            <Badge color="pink" variant="light">
+              On Sale
+            </Badge>
+          </Group>
 
-          {/* <ParGroupedBar /> */}
-        </Col>
+          <Text size="sm" color="dimmed">
+            With Fjord Tours you can explore more of the magical fjord
+            landscapes with tours and activities on and around the fjords of
+            Norway
+          </Text>
 
-        <Col xs={24} sm={24} lg={24} xl={12}>
-          <VizCard title="Shooting Percentages" bordered={false}>
-            <Statistic value={500} />
-          </VizCard>
-        </Col>
-      </StyledRow>
+          <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+            Book classic tour now
+          </Button>
+        </Card>
+      </Grid.Col>
+      <Grid.Col lg={4} md={6} sm={6} xs={12}>
+        <Card shadow="sm" p="lg" radius="md" withBorder>
+          <Card.Section>
+            <Image
+              src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
+              height={160}
+              alt="Norway"
+            />
+          </Card.Section>
 
-      <StyledRow justify="center" gutter={[24, 24]}>
-        <Col xs={24} sm={24} lg={24} xl={24}>
-          <VizCard title="Stats Table" bordered={false}>
-            <Statistic value={500} style={{ padding: 0 }} />
-          </VizCard>
-        </Col>
-      </StyledRow>
-    </>
+          <Group position="apart" mt="md" mb="xs">
+            <Text weight={500}>Norway Fjord Adventures</Text>
+            <Badge color="pink" variant="light">
+              On Sale
+            </Badge>
+          </Group>
+
+          <Text size="sm" color="dimmed">
+            With Fjord Tours you can explore more of the magical fjord
+            landscapes with tours and activities on and around the fjords of
+            Norway
+          </Text>
+
+          <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+            Book classic tour now
+          </Button>
+        </Card>
+      </Grid.Col>
+      <Grid.Col lg={4} md={6} sm={6} xs={12}>
+        <Card shadow="sm" p="lg" radius="md" withBorder>
+          <Card.Section>
+            <Image
+              src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
+              height={160}
+              alt="Norway"
+            />
+          </Card.Section>
+
+          <Group position="apart" mt="md" mb="xs">
+            <Text weight={500}>Norway Fjord Adventures</Text>
+            <Badge color="pink" variant="light">
+              On Sale
+            </Badge>
+          </Group>
+
+          <Text size="sm" color="dimmed">
+            With Fjord Tours you can explore more of the magical fjord
+            landscapes with tours and activities on and around the fjords of
+            Norway
+          </Text>
+
+          <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+            Book classic tour now
+          </Button>
+        </Card>
+      </Grid.Col>
+      <Grid.Col lg={6}>
+        <Card shadow="sm" p="lg" radius="md" withBorder>
+          <Card.Section>
+            <Image
+              src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
+              height={160}
+              alt="Norway"
+            />
+          </Card.Section>
+
+          <Group position="apart" mt="md" mb="xs">
+            <Text weight={500}>Norway Fjord Adventures</Text>
+            <Badge color="pink" variant="light">
+              On Sale
+            </Badge>
+          </Group>
+
+          <Text size="sm" color="dimmed">
+            With Fjord Tours you can explore more of the magical fjord
+            landscapes with tours and activities on and around the fjords of
+            Norway
+          </Text>
+
+          <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+            Book classic tour now
+          </Button>
+        </Card>
+      </Grid.Col>
+      <Grid.Col lg={6}>
+        <Card shadow="sm" p="lg" radius="md" withBorder>
+          <Card.Section>
+            <Image
+              src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
+              height={160}
+              alt="Norway"
+            />
+          </Card.Section>
+
+          <Group position="apart" mt="md" mb="xs">
+            <Text weight={500}>Norway Fjord Adventures</Text>
+            <Badge color="pink" variant="light">
+              On Sale
+            </Badge>
+          </Group>
+
+          <Text size="sm" color="dimmed">
+            With Fjord Tours you can explore more of the magical fjord
+            landscapes with tours and activities on and around the fjords of
+            Norway
+          </Text>
+
+          <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+            Book classic tour now
+          </Button>
+        </Card>
+      </Grid.Col>
+      <Grid.Col lg={12}>
+        <Card shadow="sm" p="lg" radius="md" withBorder>
+          <Card.Section>
+            <Image
+              src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
+              height={160}
+              alt="Norway"
+            />
+          </Card.Section>
+
+          <Group position="apart" mt="md" mb="xs">
+            <Text weight={500}>Norway Fjord Adventures</Text>
+            <Badge color="pink" variant="light">
+              On Sale
+            </Badge>
+          </Group>
+
+          <Text size="sm" color="dimmed">
+            With Fjord Tours you can explore more of the magical fjord
+            landscapes with tours and activities on and around the fjords of
+            Norway
+          </Text>
+
+          <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+            Book classic tour now
+          </Button>
+        </Card>
+      </Grid.Col>
+    </Grid>
   );
 };
 

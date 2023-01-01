@@ -1,27 +1,25 @@
-import { Grid, Layout } from 'antd';
+import { AppShell, useMantineTheme } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { Outlet } from 'react-router-dom';
-import Footer from './Footer';
-import Header from './Header';
 import MobileSidebar from './MobileSidebar';
+import PageFooter from './PageFooter';
+import PageHeader from './PageHeader';
 import Sidebar from './Sidebar';
 
-const { Content } = Layout;
-const { useBreakpoint } = Grid;
-
 const DashboardLayout: React.FC = () => {
-  const screens = useBreakpoint();
+  const theme = useMantineTheme();
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      {screens.sm === true ? <Sidebar /> : <MobileSidebar />}
-      <Layout>
-        <Header />
-        <Content style={{ margin: '0 16px' }}>
-          <Outlet />
-        </Content>
-        <Footer />
-      </Layout>
-    </Layout>
+    <AppShell
+      padding="md"
+      layout="alt"
+      header={isMobile ? <PageHeader /> : <></>}
+      navbar={isMobile ? <MobileSidebar /> : <Sidebar />}
+      // footer={<PageFooter />}
+    >
+      <Outlet />
+    </AppShell>
   );
 };
 

@@ -1,7 +1,6 @@
-import Card from 'antd/es/card';
 import styled from 'styled-components';
 
-const MetricCardStyled = styled(Card)`
+const MetricCardStyled = styled.div`
   height: 100%;
   width: 100%;
   border-radius: 3px;

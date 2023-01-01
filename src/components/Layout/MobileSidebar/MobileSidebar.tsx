@@ -1,25 +1,43 @@
-import React from 'react';
-import { Drawer } from 'antd';
-import Menu from 'antd/es/menu';
+import React, { useState } from 'react';
+import { Drawer, NavLink } from '@mantine/core';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   toggleSidebar,
-  selectSidebarClosed,
+  selectSidebarState,
 } from '../../../app/reducers/uiSlice';
-import { MenuItems } from '../../../routes/MenuItems';
+import { ReactComponent as Logo } from '../../../assets/logo/smallLogo.svg';
+import { menuItems } from '../../../routes/MenuItems';
 
 const MobileSidebar: React.FC = () => {
+  const [active, setActive] = useState(0);
   const dispatch = useDispatch();
-  const sidebarClosed = useSelector(selectSidebarClosed);
+  const sidebarOpen: boolean = useSelector(selectSidebarState);
 
   return (
     <Drawer
-      placement="bottom"
-      closable={false}
+      opened={sidebarOpen}
       onClose={() => dispatch(toggleSidebar())}
-      open={!sidebarClosed}
+      padding="md"
+      position="right"
+      title={<Logo />}
     >
-      <Menu theme="dark" items={MenuItems} mode="inline" />
+      {menuItems.map((item, index) => {
+        return (
+          <NavLink
+            key={item.label}
+            icon={item.icon}
+            label={item.label}
+            component={Link}
+            to={item.route}
+            active={index === active}
+            onClick={() => setActive(index)}
+            variant="light"
+            color="red"
+            description={item.description}
+          />
+        );
+      })}
     </Drawer>
   );
 };

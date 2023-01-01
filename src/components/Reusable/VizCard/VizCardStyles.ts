@@ -1,7 +1,6 @@
-import Card from 'antd/es/card';
 import styled from 'styled-components';
 
-const VizCardStyled = styled(Card)`
+const VizCardStyled = styled.div`
   height: 400px;
   width: 100%;
   border-radius: 5px;

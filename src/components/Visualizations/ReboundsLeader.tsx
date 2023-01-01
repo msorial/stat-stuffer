@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { UserAddOutlined } from '@ant-design/icons';
-import { RiseOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { selectPlayers } from '../../app/reducers/playerSlice';
 import { TeamLogos, TeamLogosProps } from '../../lib/constants/TeamLogos';
@@ -63,11 +61,7 @@ const ReboundsLeader: React.FC = () => {
     <MetricCard
       title="Rebounds Leader"
       teamLogo={
-        sortedPlayerArray.length > 0 ? (
-          TeamLogos[teamIndex].logo
-        ) : (
-          <RiseOutlined />
-        )
+        sortedPlayerArray.length > 0 ? TeamLogos[teamIndex].logo : <div>t</div>
       }
       playerName={rebLeader}
       statistic={
@@ -87,7 +81,7 @@ const ReboundsLeader: React.FC = () => {
             </span>
           </>
         ) : (
-          <UserAddOutlined />
+          <div>t</div>
         )
       }
       season={maxSzn}
