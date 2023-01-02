@@ -13,12 +13,12 @@ export const menuItems: MenuItemProps[] = [
     icon: <LineChartOutlined />,
     label: 'Average Overview',
     route: '/average-overview',
-    description: 'View favorite players averages',
+    description: 'NBA Player Season Averages',
   },
   {
     icon: <FireOutlined />,
     label: 'Prize Picker',
     route: '/prize-picker',
-    description: 'Use data to win your prizepicks',
+    description: 'Use Data to Win your Prizepicks',
   },
 ];

@@ -1,9 +1,8 @@
 import { AppShell, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { Outlet } from 'react-router-dom';
+import MobileHeader from './MobileHeader';
 import MobileSidebar from './MobileSidebar';
-import PageFooter from './PageFooter';
-import PageHeader from './PageHeader';
 import Sidebar from './Sidebar';
 
 const DashboardLayout: React.FC = () => {
@@ -12,11 +11,17 @@ const DashboardLayout: React.FC = () => {
 
   return (
     <AppShell
-      padding="md"
       layout="alt"
-      header={isMobile ? <PageHeader /> : <></>}
+      header={isMobile ? <MobileHeader /> : <></>}
       navbar={isMobile ? <MobileSidebar /> : <Sidebar />}
-      // footer={<PageFooter />}
+      sx={{
+        main: {
+          backgroundColor:
+            theme.colorScheme === 'dark'
+              ? theme.colors.dark[8]
+              : theme.colors.gray[1],
+        },
+      }}
     >
       <Outlet />
     </AppShell>

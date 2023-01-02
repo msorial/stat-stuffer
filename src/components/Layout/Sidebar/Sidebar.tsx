@@ -1,21 +1,15 @@
 import React from 'react';
 import { ActionIcon, Center, Navbar, Stack, Tooltip } from '@mantine/core';
-import { IconMoonStars } from '@tabler/icons';
 import { Link, useLocation } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../../assets/logo/smallLogo.svg';
 import { menuItems } from '../../../routes/MenuItems';
+import ThemeToggle from '../../Reusable/ThemeToggle';
 
 const Sidebar: React.FC = () => {
   const location = useLocation();
 
   return (
-    <Navbar
-      width={{ base: 80 }}
-      p="md"
-      sx={{
-        backgroundColor: '#121926',
-      }}
-    >
+    <Navbar width={{ base: 80 }} p="md">
       <Center>
         <Logo />
       </Center>
@@ -51,13 +45,7 @@ const Sidebar: React.FC = () => {
 
       <Navbar.Section>
         <Center>
-          <ActionIcon
-            variant="outline"
-            sx={{ color: 'white' }}
-            title="Toggle color scheme"
-          >
-            <IconMoonStars size={16} stroke={1.5} />
-          </ActionIcon>
+          <ThemeToggle />
         </Center>
       </Navbar.Section>
     </Navbar>

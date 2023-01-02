@@ -1,5 +1,18 @@
 export const playerList = [
   {
+    value: 'LeBron James',
+  },
+  {
+    value: 'Michael Jordan',
+  },
+  {
+    value: 'Kobe Bryant',
+  },
+  {
+    value: 'Luka Doncic',
+  },
+
+  {
     value: 'Ike Anigbogu',
   },
   {
@@ -1702,9 +1715,6 @@ export const playerList = [
   },
   {
     value: 'Travis Knight',
-  },
-  {
-    value: 'Kobe Bryant',
   },
   {
     value: 'Matt Maloney',
@@ -7155,9 +7165,6 @@ export const playerList = [
     value: 'John Paxson',
   },
   {
-    value: 'Michael Jordan',
-  },
-  {
     value: 'Scott Williams',
   },
   {
@@ -8928,9 +8935,6 @@ export const playerList = [
     value: 'Ryan Daly',
   },
   {
-    value: 'Luka Doncic',
-  },
-  {
     value: 'Brandon Rachal',
   },
   {
@@ -9535,9 +9539,6 @@ export const playerList = [
   },
   {
     value: 'Marial Shayok',
-  },
-  {
-    value: 'LeBron James',
   },
   {
     value: 'Mike Scott',

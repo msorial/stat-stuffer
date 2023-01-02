@@ -1,38 +1,35 @@
-import { Flex, Header, Burger, ActionIcon } from '@mantine/core';
-import { IconMoonStars } from '@tabler/icons';
+import { Flex, Header, Burger, useMantineTheme } from '@mantine/core';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  selectColorTheme,
   selectSidebarState,
   toggleSidebar,
 } from '../../../app/reducers/uiSlice';
 import { ReactComponent as Logo } from '../../../assets/logo/smallLogo.svg';
+import ThemeToggle from '../../Reusable/ThemeToggle';
 
-const PageHeader: React.FC = () => {
+const MobileHeader: React.FC = () => {
+  const theme = useMantineTheme();
   const dispatch = useDispatch();
   const sidebarOpen: boolean = useSelector(selectSidebarState);
+  const darkMode: boolean = useSelector(selectColorTheme);
 
   return (
-    <Header height={60} p="md">
+    <Header height={60} p="md" fixed={false}>
       <Flex justify="space-between" align="center" direction="row">
         <Burger
           size="sm"
-          color="#121926"
+          color={darkMode ? theme.colors.gray[1] : theme.colors.dark[5]}
           opened={sidebarOpen}
           onClick={() => dispatch(toggleSidebar())}
         />
 
         <Logo />
 
-        <ActionIcon
-          variant="outline"
-          sx={{ color: '#121926' }}
-          title="Toggle color scheme"
-        >
-          <IconMoonStars size={16} stroke={1.5} />
-        </ActionIcon>
+        <ThemeToggle />
       </Flex>
     </Header>
   );
 };
 
-export default PageHeader;
+export default MobileHeader;

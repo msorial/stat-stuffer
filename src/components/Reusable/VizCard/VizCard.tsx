@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import VizCardStyled from './VizCardStyles';
 
 interface MetricCardProps {
   title: string;

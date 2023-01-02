@@ -63,10 +63,17 @@ export const playerSlice = createSlice({
         players: newPlayerArray,
       };
     },
+    deleteAllPlayers: (state) => {
+      return {
+        ...state,
+        players: [],
+      };
+    },
   },
 });
 
-export const { addPlayer, deletePlayer } = playerSlice.actions;
+export const { addPlayer, deletePlayer, deleteAllPlayers } =
+  playerSlice.actions;
 
 export const selectPlayers = (state: RootState) => state.playerSlice.players;
 

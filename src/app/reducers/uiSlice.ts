@@ -3,10 +3,12 @@ import { RootState } from '../store';
 
 interface UiSliceState {
   sidebarOpen: boolean;
+  darkMode: boolean;
 }
 
 const initialState: UiSliceState = {
   sidebarOpen: false,
+  darkMode: false,
 };
 
 export const uiSlice = createSlice({
@@ -19,12 +21,20 @@ export const uiSlice = createSlice({
         sidebarOpen: !state.sidebarOpen,
       };
     },
+    toggleTheme: (state) => {
+      return {
+        ...state,
+        darkMode: !state.darkMode,
+      };
+    },
   },
 });
 
-export const { toggleSidebar } = uiSlice.actions;
+export const { toggleSidebar, toggleTheme } = uiSlice.actions;
 
 export const selectSidebarState = (state: RootState) =>
   state.uiSlice.sidebarOpen;
+
+export const selectColorTheme = (state: RootState) => state.uiSlice.darkMode;
 
 export default uiSlice.reducer;
