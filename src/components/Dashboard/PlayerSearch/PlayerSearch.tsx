@@ -107,7 +107,7 @@ const PlayerSearch: React.FC = () => {
             <Autocomplete
               {...register('playerName', { required: true })}
               icon={<IconShirtSport stroke={1.5} size={18} />}
-              placeholder="Search Player..."
+              placeholder="Search Player"
               data={playerList}
               limit={4}
               {...field}

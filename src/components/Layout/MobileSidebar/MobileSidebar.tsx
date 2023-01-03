@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { Drawer, NavLink, Stack } from '@mantine/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   toggleSidebar,
   selectSidebarState,
@@ -19,7 +19,7 @@ const StyledDrawer = styled(Drawer)`
 `;
 
 const MobileSidebar: React.FC = () => {
-  const [active, setActive] = useState(0);
+  const location = useLocation();
   const dispatch = useDispatch();
   const sidebarOpen: boolean = useSelector(selectSidebarState);
 
@@ -33,7 +33,7 @@ const MobileSidebar: React.FC = () => {
     >
       <Stack justify="space-between" align="stretch" sx={{ height: '100%' }}>
         <div>
-          {menuItems.map((item, index) => {
+          {menuItems.map((item) => {
             return (
               <NavLink
                 key={item.label}
@@ -41,9 +41,8 @@ const MobileSidebar: React.FC = () => {
                 label={item.label}
                 component={Link}
                 to={item.route}
-                active={index === active}
+                active={item.route === location.pathname}
                 onClick={() => {
-                  setActive(index);
                   dispatch(toggleSidebar());
                 }}
                 variant="light"

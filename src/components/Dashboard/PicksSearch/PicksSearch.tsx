@@ -138,7 +138,7 @@ const PicksSearch: React.FC = () => {
               <Autocomplete
                 {...register('playerName', { required: true })}
                 icon={<IconShirtSport stroke={1.5} size={18} />}
-                placeholder="Search Player..."
+                placeholder="Search Player"
                 data={playerList}
                 limit={4}
                 {...field}
@@ -184,6 +184,10 @@ const PicksSearch: React.FC = () => {
                 <NumberInput
                   icon={<IconHexagonLetterP stroke={1.5} size={18} />}
                   placeholder="Points"
+                  precision={1}
+                  step={0.5}
+                  stepHoldDelay={500}
+                  stepHoldInterval={100}
                   {...field}
                 />
               )}
@@ -198,6 +202,10 @@ const PicksSearch: React.FC = () => {
                 <NumberInput
                   icon={<IconHexagonLetterA stroke={1.5} size={18} />}
                   placeholder="Assists"
+                  precision={1}
+                  step={0.5}
+                  stepHoldDelay={500}
+                  stepHoldInterval={100}
                   {...field}
                 />
               )}
@@ -212,6 +220,10 @@ const PicksSearch: React.FC = () => {
                 <NumberInput
                   icon={<IconHexagonLetterR stroke={1.5} size={18} />}
                   placeholder="Rebounds"
+                  precision={1}
+                  step={0.5}
+                  stepHoldDelay={500}
+                  stepHoldInterval={100}
                   {...field}
                 />
               )}
@@ -226,6 +238,10 @@ const PicksSearch: React.FC = () => {
                 <NumberInput
                   icon={<IconChartRadar stroke={1.5} size={18} />}
                   placeholder="Pts + Asts + Rebs"
+                  precision={1}
+                  step={0.5}
+                  stepHoldDelay={500}
+                  stepHoldInterval={100}
                   {...field}
                 />
               )}

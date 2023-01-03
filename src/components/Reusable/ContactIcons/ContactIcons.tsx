@@ -11,6 +11,7 @@ const StyledSocialIcons = styled.a`
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+  font-size: 20px;
 
   &:hover {
     transform: scale(1.1);
@@ -36,7 +37,7 @@ const contactItems: ContactItemProps[] = [
   {
     app: 'GitHub',
     icon: <GithubOutlined />,
-    link: 'https://www.linkedin.com/in/mark-sor/',
+    link: 'https://github.com/msorial',
     label: 'View other Projects',
   },
   {
@@ -49,11 +50,13 @@ const contactItems: ContactItemProps[] = [
 
 const ContactIcons: React.FC = () => {
   return (
-    <Flex justify="center" align="center" direction="row" gap="lg">
+    <Flex justify="center" align="center" direction="row" gap="xl">
       {contactItems.map((item) => {
         return (
           <Tooltip key={item.app} label={item.label} offset={10}>
-            <StyledSocialIcons href={item.link}>{item.icon}</StyledSocialIcons>
+            <StyledSocialIcons href={item.link} target="_blank">
+              {item.icon}
+            </StyledSocialIcons>
           </Tooltip>
         );
       })}

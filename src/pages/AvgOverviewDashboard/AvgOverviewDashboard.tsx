@@ -8,7 +8,7 @@ import PlayerSearch from '../../components/Dashboard/PlayerSearch';
 const AvgOverviewDashboard: React.FC = () => {
   return (
     <Flex align="flex-start" direction="column" gap="lg">
-      <PageHeader pageTitle={'Average Overview'} extra={<PlayerSearch />} />
+      <PageHeader pageTitle={'Average Overview'} search={<PlayerSearch />} />
 
       <PlayerRow />
 

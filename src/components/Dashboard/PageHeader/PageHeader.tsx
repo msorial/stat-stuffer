@@ -1,30 +1,47 @@
 import React, { ReactNode } from 'react';
 import { Flex, Title } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
+import PageTitle from '../PageTitle';
 
 interface PageHeaderProps {
   pageTitle: string;
-  extra?: ReactNode;
+  search?: ReactNode;
+  prizePicksPlayer?: ReactNode;
+  dashboard?: 'average-overview' | 'prize-picker';
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ pageTitle, extra }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({
+  pageTitle,
+  search,
+  prizePicksPlayer,
+  dashboard,
+}) => {
+  const isSmall = useMediaQuery('(max-width: 1247px)');
+
   return (
     <Flex
       justify="space-between"
       direction="row"
       wrap="wrap"
       gap="xl"
-      sx={{ width: '100%', padding: '10px 0px 0px' }}
+      sx={{ width: '100%', padding: '10px 5px 0px' }}
     >
-      <Title
-        order={2}
-        fw={600}
-        variant="gradient"
-        gradient={{ from: '#ff8a00', to: '#da1b60', deg: 45 }}
-      >
-        {pageTitle}
-      </Title>
+      {dashboard === 'prize-picker' ? (
+        <Flex
+          direction={isSmall ? 'row' : 'column'}
+          justify={isSmall ? 'space-between' : 'space-around'}
+          align={isSmall ? 'center' : 'flex-start'}
+          sx={{ width: isSmall ? '100%' : 'auto' }}
+        >
+          <PageTitle pageTitle={pageTitle} />
 
-      {extra}
+          {prizePicksPlayer}
+        </Flex>
+      ) : (
+        <PageTitle pageTitle={pageTitle} />
+      )}
+
+      {search}
     </Flex>
   );
 };

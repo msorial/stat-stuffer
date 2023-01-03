@@ -1,4 +1,4 @@
-import { AppShell, useMantineTheme } from '@mantine/core';
+import { AppShell, Container, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { Outlet } from 'react-router-dom';
 import MobileHeader from './MobileHeader';
@@ -23,7 +23,9 @@ const DashboardLayout: React.FC = () => {
         },
       }}
     >
-      <Outlet />
+      <Container size="xl" sx={{ height: '100%' }}>
+        <Outlet />
+      </Container>
     </AppShell>
   );
 };
