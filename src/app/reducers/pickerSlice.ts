@@ -2,10 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
 interface PickerSliceState {
-  players: PickerProps[];
+  singlePlayerStats: PickerProps[];
 }
 
-interface PickerProps {
+export interface PickerProps {
   id: number;
   ast: number;
   blk: number;
@@ -60,15 +60,31 @@ interface TeamProps {
 }
 
 const initialState: PickerSliceState = {
-  players: [],
+  singlePlayerStats: [],
 };
 
 export const pickerSlice = createSlice({
   name: 'picker',
   initialState,
-  reducers: {},
+  reducers: {
+    addPicks: (state, action: PayloadAction<PickerProps[]>) => {
+      return {
+        ...state,
+        singlePlayerStats: [...action.payload],
+      };
+    },
+    deletePicks: (state) => {
+      return {
+        ...state,
+        singlePlayerStats: initialState.singlePlayerStats,
+      };
+    },
+  },
 });
 
-export const {} = pickerSlice.actions;
+export const { addPicks, deletePicks } = pickerSlice.actions;
+
+export const selectPicks = (state: RootState) =>
+  state.pickerSlice.singlePlayerStats;
 
 export default pickerSlice.reducer;

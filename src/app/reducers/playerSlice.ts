@@ -5,7 +5,7 @@ interface PlayerSliceState {
   players: PlayerProps[];
 }
 
-interface PlayerProps {
+export interface PlayerProps {
   id: number;
   firstName: string;
   lastName: string;
@@ -43,8 +43,8 @@ export const playerSlice = createSlice({
   reducers: {
     addPlayer: (state, action: PayloadAction<PlayerProps>) => {
       const playerIndex = state.players.findIndex(
-        (player) => player.id === action.payload.id
-      ); // * -1 = Player not found in array
+        (player: PlayerProps) => player.id === action.payload.id
+      ); // -1 = Player not found in array
 
       return {
         ...state,
@@ -56,7 +56,7 @@ export const playerSlice = createSlice({
     },
     deletePlayer: (state, action) => {
       const newPlayerArray = state.players.filter(
-        (player) => player.id !== action.payload
+        (player: PlayerProps) => player.id !== action.payload
       );
       return {
         ...state,
