@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Flex, Title } from '@mantine/core';
+import { Flex } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import PageTitle from '../PageTitle';
 
@@ -23,7 +23,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
       justify="space-between"
       direction="row"
       wrap="wrap"
-      gap="xl"
+      gap="lg"
       sx={{ width: '100%', padding: '10px 5px 0px' }}
     >
       {dashboard === 'prize-picker' ? (

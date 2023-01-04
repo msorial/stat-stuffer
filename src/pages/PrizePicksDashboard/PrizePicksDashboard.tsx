@@ -1,9 +1,8 @@
 import React from 'react';
-import { Badge, Center, Grid, Loader, Stack, Text } from '@mantine/core';
+import { Center, Grid, Loader, Stack, Text } from '@mantine/core';
 import PageHeader from '../../components/Dashboard/PageHeader/PageHeader';
 import PicksSearch from '../../components/Dashboard/PicksSearch';
-import { TeamColors } from '../../lib/constants/TeamColors';
-import { TeamLogos } from '../../lib/constants/TeamLogos';
+import PicksTag from '../../components/Dashboard/PicksTag';
 
 const AvgOverviewDashboard: React.FC = () => {
   return (
@@ -13,23 +12,7 @@ const AvgOverviewDashboard: React.FC = () => {
           pageTitle={'Prize Picker'}
           search={<PicksSearch />}
           dashboard="prize-picker"
-          prizePicksPlayer={
-            <Badge
-              // key={player.id}
-              variant="filled"
-              leftSection={TeamLogos[1].logo}
-              // rightSection={
-              //   <CloseOutlined onClick={() => handleDeletePlayer(player.id)} />
-              // }
-              sx={{
-                backgroundColor: `${TeamColors[1].primaryColor}80`,
-                color: `${TeamColors[1].secondaryColor}`,
-                borderColor: `${TeamColors[1].primaryColor}`,
-              }}
-            >
-              <Text sx={{ fontSize: '11px' }}>Trae Young</Text>
-            </Badge>
-          }
+          prizePicksPlayer={<PicksTag />}
         />
       </Grid.Col>
 

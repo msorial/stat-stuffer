@@ -21,10 +21,6 @@ const PlayerRow: React.FC = () => {
   const dispatch = useDispatch();
   const playerArray = useSelector(selectPlayers);
 
-  const handleDeletePlayer = (id: number) => {
-    dispatch(deletePlayer(id));
-  };
-
   if (playerArray.length > 0) {
     return (
       <Flex
@@ -59,7 +55,7 @@ const PlayerRow: React.FC = () => {
                   leftSection={TeamLogos[teamIndex].logo}
                   rightSection={
                     <CloseOutlined
-                      onClick={() => handleDeletePlayer(player.id)}
+                      onClick={() => dispatch(deletePlayer(player.id))}
                     />
                   }
                   sx={{
