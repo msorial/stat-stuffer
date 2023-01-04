@@ -19,6 +19,6 @@ export const menuItems: MenuItemProps[] = [
     icon: <FireOutlined />,
     label: 'Prize Picker',
     route: '/prize-picker',
-    description: 'Use Data to Win your Prizepicks',
+    description: 'Use Data to Win your PrizePicks',
   },
 ];

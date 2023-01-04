@@ -17,7 +17,7 @@ import {
 } from '@tabler/icons';
 import { useForm, Controller } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { addPicks, PickerProps } from '../../../app/reducers/pickerSlice';
+import { addStats, PickerProps } from '../../../app/reducers/pickerSlice';
 import { playerList } from '../../../lib/constants/PlayerList';
 import { teamList } from '../../../lib/constants/Teams';
 
@@ -97,7 +97,7 @@ const PicksSearch: React.FC = () => {
           }
         );
 
-        dispatch(addPicks(gameStatsData));
+        dispatch(addStats(gameStatsData));
       };
 
       fetchData().catch(console.error);
