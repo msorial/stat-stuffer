@@ -1,4 +1,4 @@
-export const teamList = [
+export const TeamAutocompleteData = [
   {
     value: 'Atlanta Hawks',
   },

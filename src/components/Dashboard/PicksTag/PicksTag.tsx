@@ -13,41 +13,43 @@ const PicksTag: React.FC = () => {
   const dispatch = useDispatch();
   const pickPlayerGames: PickerProps[] = useSelector(selectPlayerStats);
 
-  if (pickPlayerGames.length > 0) {
-    const colorIndex = TeamColors.findIndex(
-      (color: TeamColorsProps) =>
-        color.team ===
-        (pickPlayerGames[0].team.abbreviation
-          ? pickPlayerGames[0].team.abbreviation
-          : 'undefined')
-    );
+  if (pickPlayerGames.length === 0) {
+    return <></>;
+  }
 
-    const teamIndex = TeamLogos.findIndex(
-      (logo: TeamLogosProps) =>
-        logo.team ===
-        (pickPlayerGames[0].team.abbreviation
-          ? pickPlayerGames[0].team.abbreviation
-          : 'undefined')
-    );
+  const colorIndex = TeamColors.findIndex(
+    (color: TeamColorsProps) =>
+      color.team ===
+      (pickPlayerGames[0].team.abbreviation
+        ? pickPlayerGames[0].team.abbreviation
+        : 'undefined')
+  );
 
-    return (
-      <Badge
-        key={pickPlayerGames[0].player.id}
-        variant="filled"
-        leftSection={TeamLogos[teamIndex].logo}
-        rightSection={<CloseOutlined onClick={() => dispatch(deleteStats())} />}
-        sx={{
-          backgroundColor: `${TeamColors[colorIndex].primaryColor}80`,
-          color: `${TeamColors[colorIndex].secondaryColor}`,
-          borderColor: `${TeamColors[colorIndex].primaryColor}`,
-        }}
-      >
-        <Text
-          sx={{ fontSize: '11px' }}
-        >{`${pickPlayerGames[0].player.first_name} ${pickPlayerGames[0].player.last_name}`}</Text>
-      </Badge>
-    );
-  } else return <></>;
+  const teamIndex = TeamLogos.findIndex(
+    (logo: TeamLogosProps) =>
+      logo.team ===
+      (pickPlayerGames[0].team.abbreviation
+        ? pickPlayerGames[0].team.abbreviation
+        : 'undefined')
+  );
+
+  return (
+    <Badge
+      key={pickPlayerGames[0].player.id}
+      variant="filled"
+      leftSection={TeamLogos[teamIndex].logo}
+      rightSection={<CloseOutlined onClick={() => dispatch(deleteStats())} />}
+      sx={{
+        backgroundColor: `${TeamColors[colorIndex].primaryColor}80`,
+        color: `${TeamColors[colorIndex].secondaryColor}`,
+        borderColor: `${TeamColors[colorIndex].primaryColor}`,
+      }}
+    >
+      <Text
+        sx={{ fontSize: '11px' }}
+      >{`${pickPlayerGames[0].player.first_name} ${pickPlayerGames[0].player.last_name}`}</Text>
+    </Badge>
+  );
 };
 
 export default PicksTag;

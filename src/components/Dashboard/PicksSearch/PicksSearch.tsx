@@ -17,17 +17,19 @@ import {
 } from '@tabler/icons';
 import { useForm, Controller } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { addStats, PickerProps } from '../../../app/reducers/pickerSlice';
+import {
+  addStats,
+  setBetDetails,
+  PickerProps,
+} from '../../../app/reducers/pickerSlice';
 import { playerList } from '../../../lib/constants/PlayerList';
-import { teamList } from '../../../lib/constants/Teams';
+import { TeamAutocompleteData } from '../../../lib/constants/TeamAutocompleteData';
+import { TeamList } from '../../../lib/constants/TeamList';
 
 interface PicksQueryObjectProps {
-  playerName: string | undefined;
-  opponent: string | undefined;
-  points?: number | undefined;
-  assists?: number | undefined;
-  rebounds?: number | undefined;
-  par?: number | undefined;
+  playerName: string;
+  opposingTeam: string;
+  betValue: number | undefined;
 }
 
 const PicksSearch: React.FC = () => {
@@ -35,47 +37,40 @@ const PicksSearch: React.FC = () => {
   const [playerQueryObject, setPlayerQueryObject] =
     useState<PicksQueryObjectProps>({
       playerName: '',
-      opponent: '',
-      points: undefined,
-      assists: undefined,
-      rebounds: undefined,
-      par: undefined,
+      opposingTeam: '',
+      betValue: undefined,
     });
-  const { register, control, handleSubmit, reset, formState } = useForm({
+  const { register, control, handleSubmit } = useForm({
     defaultValues: playerQueryObject,
   });
   const [category, setCategory] = useState<string>('Points');
 
   const onSubmit = (data: PicksQueryObjectProps) => {
-    const { playerName, opponent, points, assists, rebounds, par } = data;
+    const { playerName, opposingTeam, betValue } = data;
 
-    if (playerName !== '') {
+    if (playerName !== '' && betValue !== undefined && opposingTeam !== '') {
       setPlayerQueryObject({
         playerName: playerName,
-        opponent: opponent,
-        points: points,
-        assists: assists,
-        rebounds: rebounds,
-        par: par,
+        opposingTeam: opposingTeam,
+        betValue: betValue,
       });
+
+      const teamObject = TeamList.find(
+        (team) => team.full_name === opposingTeam
+      );
+
+      dispatch(
+        setBetDetails({
+          betCategory: category,
+          betValue: betValue,
+          opposingTeam: teamObject,
+        })
+      );
     }
   };
 
   useEffect(() => {
-    if (formState.isSubmitSuccessful) {
-      reset({
-        playerName: '',
-        opponent: '',
-        points: undefined,
-        assists: undefined,
-        rebounds: undefined,
-        par: undefined,
-      });
-    }
-  }, [formState, reset]);
-
-  // Need new logic here to store all games from current season
-  useEffect(() => {
+    // TODO: add more checks here before exexuting
     if (playerQueryObject.playerName !== '') {
       const fetchData = async () => {
         const playerInfo = await fetch(
@@ -126,14 +121,14 @@ const PicksSearch: React.FC = () => {
 
         <Grid.Col span={6}>
           <Controller
-            name="opponent"
+            name="opposingTeam"
             control={control}
             render={({ field }) => (
               <Autocomplete
-                {...register('opponent', { required: true })}
+                {...register('opposingTeam', { required: true })}
                 icon={<IconKarate stroke={1.5} size={18} />}
                 placeholder="Enter Opponent"
-                data={teamList}
+                data={TeamAutocompleteData}
                 limit={4}
                 {...field}
               />
@@ -152,81 +147,33 @@ const PicksSearch: React.FC = () => {
           />
         </Grid.Col>
 
-        {category === 'Points' ? (
-          <Grid.Col span={5}>
-            <Controller
-              name="points"
-              control={control}
-              render={({ field }) => (
-                <NumberInput
-                  icon={<IconHexagonLetterP stroke={1.5} size={18} />}
-                  placeholder="Points"
-                  precision={1}
-                  step={0.5}
-                  stepHoldDelay={500}
-                  stepHoldInterval={100}
-                  {...field}
-                />
-              )}
-            />
-          </Grid.Col>
-        ) : category === 'Assists' ? (
-          <Grid.Col span={5}>
-            <Controller
-              name="assists"
-              control={control}
-              render={({ field }) => (
-                <NumberInput
-                  icon={<IconHexagonLetterA stroke={1.5} size={18} />}
-                  placeholder="Assists"
-                  precision={1}
-                  step={0.5}
-                  stepHoldDelay={500}
-                  stepHoldInterval={100}
-                  {...field}
-                />
-              )}
-            />
-          </Grid.Col>
-        ) : category === 'Rebounds' ? (
-          <Grid.Col span={5}>
-            <Controller
-              name="rebounds"
-              control={control}
-              render={({ field }) => (
-                <NumberInput
-                  icon={<IconHexagonLetterR stroke={1.5} size={18} />}
-                  placeholder="Rebounds"
-                  precision={1}
-                  step={0.5}
-                  stepHoldDelay={500}
-                  stepHoldInterval={100}
-                  {...field}
-                />
-              )}
-            />
-          </Grid.Col>
-        ) : category === 'Pts + Asts + Rebs' ? (
-          <Grid.Col span={5}>
-            <Controller
-              name="par"
-              control={control}
-              render={({ field }) => (
-                <NumberInput
-                  icon={<IconChartRadar stroke={1.5} size={18} />}
-                  placeholder="Pts + Asts + Rebs"
-                  precision={1}
-                  step={0.5}
-                  stepHoldDelay={500}
-                  stepHoldInterval={100}
-                  {...field}
-                />
-              )}
-            />
-          </Grid.Col>
-        ) : (
-          <></>
-        )}
+        <Grid.Col span={5}>
+          <Controller
+            name="betValue"
+            control={control}
+            render={({ field }) => (
+              <NumberInput
+                icon={
+                  category === 'Points' ? (
+                    <IconHexagonLetterP stroke={1.5} size={18} />
+                  ) : category === 'Assists' ? (
+                    <IconHexagonLetterA stroke={1.5} size={18} />
+                  ) : category === 'Rebounds' ? (
+                    <IconHexagonLetterR stroke={1.5} size={18} />
+                  ) : (
+                    <IconChartRadar stroke={1.5} size={18} />
+                  )
+                }
+                placeholder={category}
+                precision={1}
+                step={0.5}
+                stepHoldDelay={500}
+                stepHoldInterval={100}
+                {...field}
+              />
+            )}
+          />
+        </Grid.Col>
 
         <Grid.Col span={1}>
           <ActionIcon color="green" radius="sm" variant="light" type="submit">

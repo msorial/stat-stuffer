@@ -3,6 +3,7 @@ import { RootState } from '../store';
 
 interface PickerSliceState {
   playerGameStats: PickerProps[];
+  betDetails: BetProps;
 }
 
 export interface PickerProps {
@@ -19,7 +20,7 @@ export interface PickerProps {
   ft_pct: number;
   fta: number;
   ftm: number;
-  min: number;
+  min: string;
   oreb: number;
   pf: number;
   pts: number;
@@ -49,7 +50,7 @@ interface PlayerProps {
   team_id: number;
 }
 
-interface TeamProps {
+export interface TeamProps {
   id: number;
   abbreviation: string;
   city: string;
@@ -59,8 +60,19 @@ interface TeamProps {
   name: string;
 }
 
+export interface BetProps {
+  betCategory: string;
+  betValue: number;
+  opposingTeam: TeamProps | undefined;
+}
+
 const initialState: PickerSliceState = {
   playerGameStats: [],
+  betDetails: {
+    betCategory: 'Points',
+    betValue: 0,
+    opposingTeam: undefined,
+  },
 };
 
 export const pickerSlice = createSlice({
@@ -79,12 +91,21 @@ export const pickerSlice = createSlice({
         playerGameStats: initialState.playerGameStats,
       };
     },
+    setBetDetails: (state, action: PayloadAction<BetProps>) => {
+      return {
+        ...state,
+        betDetails: action.payload,
+      };
+    },
   },
 });
 
-export const { addStats, deleteStats } = pickerSlice.actions;
+export const { addStats, deleteStats, setBetDetails } = pickerSlice.actions;
 
 export const selectPlayerStats = (state: RootState) =>
   state.pickerSlice.playerGameStats;
+
+export const selectBetDetails = (state: RootState) =>
+  state.pickerSlice.betDetails;
 
 export default pickerSlice.reducer;
