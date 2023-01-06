@@ -8,6 +8,7 @@ import {
   Center,
   ThemeIcon,
   Divider,
+  ScrollArea,
 } from '@mantine/core';
 import { IconCheck, IconX } from '@tabler/icons';
 import { useSelector } from 'react-redux';
@@ -103,67 +104,79 @@ const GameLogs: React.FC = () => {
                   </Stack>
                 </Flex>
 
-                <Flex
-                  gap="xl"
-                  direction="row"
-                  wrap="nowrap"
-                  sx={{ height: '100%' }}
+                <ScrollArea
+                  scrollbarSize={3}
+                  scrollHideDelay={500}
+                  sx={{ padding: '10px' }}
+                  type="hover"
                 >
-                  <Stack align="center" spacing="xs">
-                    <Text color="dimmed" size="xs" transform="uppercase">
-                      Points
-                    </Text>
-                    <Center sx={{ height: '100%' }}>
-                      <Title weight={700} size="xl">
-                        {game.pts}
-                      </Title>
-                    </Center>
-                  </Stack>
+                  <Flex
+                    gap="xl"
+                    direction="row"
+                    wrap="nowrap"
+                    sx={{ height: '100%' }}
+                  >
+                    <Stack align="center" spacing="xs">
+                      <Text color="dimmed" size="xs" transform="uppercase">
+                        Points
+                      </Text>
+                      <Center sx={{ height: '100%' }}>
+                        <Title weight={700} size="xl">
+                          {game.pts}
+                        </Title>
+                      </Center>
+                    </Stack>
 
-                  <Stack align="center" spacing="xs">
-                    <Text color="dimmed" size="xs" transform="uppercase">
-                      Assists
-                    </Text>
-                    <Center sx={{ height: '100%' }}>
-                      <Title weight={700} size="xl">
-                        {game.ast}
-                      </Title>
-                    </Center>
-                  </Stack>
+                    <Stack align="center" spacing="xs">
+                      <Text color="dimmed" size="xs" transform="uppercase">
+                        Assists
+                      </Text>
+                      <Center sx={{ height: '100%' }}>
+                        <Title weight={700} size="xl">
+                          {game.ast}
+                        </Title>
+                      </Center>
+                    </Stack>
 
-                  <Stack align="center" spacing="xs">
-                    <Text color="dimmed" size="xs" transform="uppercase">
-                      Rebounds
-                    </Text>
-                    <Center sx={{ height: '100%' }}>
-                      <Title weight={700} size="xl">
-                        {game.reb}
-                      </Title>
-                    </Center>
-                  </Stack>
+                    <Stack align="center" spacing="xs">
+                      <Text color="dimmed" size="xs" transform="uppercase">
+                        Rebounds
+                      </Text>
+                      <Center sx={{ height: '100%' }}>
+                        <Title weight={700} size="xl">
+                          {game.reb}
+                        </Title>
+                      </Center>
+                    </Stack>
 
-                  <Stack align="center" spacing="xs">
-                    <Text color="dimmed" size="xs" transform="uppercase">
-                      Pts + Asts + Rebs
-                    </Text>
-                    <Center sx={{ height: '100%' }}>
-                      <Title weight={700} size="xl">
-                        {game.pts + game.ast + game.reb}
-                      </Title>
-                    </Center>
-                  </Stack>
+                    <Stack align="center" spacing="xs">
+                      <Text
+                        color="dimmed"
+                        size="xs"
+                        transform="uppercase"
+                        sx={{ whiteSpace: 'nowrap' }}
+                      >
+                        Pts + Asts + Rebs
+                      </Text>
+                      <Center sx={{ height: '100%' }}>
+                        <Title weight={700} size="xl">
+                          {game.pts + game.ast + game.reb}
+                        </Title>
+                      </Center>
+                    </Stack>
 
-                  <Stack align="center" spacing="xs">
-                    <Text color="dimmed" size="xs" transform="uppercase">
-                      Minutes
-                    </Text>
-                    <Center sx={{ height: '100%' }}>
-                      <Title weight={700} size="xl">
-                        {game.min === '00' ? 'DNP' : game.min}
-                      </Title>
-                    </Center>
-                  </Stack>
-                </Flex>
+                    <Stack align="center" spacing="xs">
+                      <Text color="dimmed" size="xs" transform="uppercase">
+                        Minutes
+                      </Text>
+                      <Center sx={{ height: '100%' }}>
+                        <Title weight={700} size="xl">
+                          {game.min === '00' ? 'DNP' : game.min}
+                        </Title>
+                      </Center>
+                    </Stack>
+                  </Flex>
+                </ScrollArea>
               </Flex>
             </Box>
 
