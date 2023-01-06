@@ -17,17 +17,19 @@ import {
 } from '@tabler/icons';
 import { useForm, Controller } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { addPlayer } from '../../../app/reducers/playerSlice';
+import {
+  addStats,
+  setBetDetails,
+  PickerProps,
+} from '../../../app/reducers/pickerSlice';
 import { playerList } from '../../../lib/constants/PlayerList';
-import { teamList } from '../../../lib/constants/Teams';
+import { TeamAutocompleteData } from '../../../lib/constants/TeamAutocompleteData';
+import { TeamList } from '../../../lib/constants/TeamList';
 
 interface PicksQueryObjectProps {
-  playerName: string | undefined;
-  opponent: string | undefined;
-  points?: number | undefined;
-  assists?: number | undefined;
-  rebounds?: number | undefined;
-  par?: number | undefined;
+  playerName: string;
+  opposingTeam: string;
+  betValue: number | undefined;
 }
 
 const PicksSearch: React.FC = () => {
@@ -35,97 +37,70 @@ const PicksSearch: React.FC = () => {
   const [playerQueryObject, setPlayerQueryObject] =
     useState<PicksQueryObjectProps>({
       playerName: '',
-      opponent: '',
-      points: undefined,
-      assists: undefined,
-      rebounds: undefined,
-      par: undefined,
+      opposingTeam: '',
+      betValue: undefined,
     });
-  const { register, control, handleSubmit, reset, formState } = useForm({
+  const { register, control, handleSubmit } = useForm({
     defaultValues: playerQueryObject,
   });
   const [category, setCategory] = useState<string>('Points');
 
-  const onSubmit = (data: any) => {
-    const { playerName, opponent, points, assists, rebounds, par } = data;
+  const onSubmit = (data: PicksQueryObjectProps) => {
+    const { playerName, opposingTeam, betValue } = data;
 
-    if (playerName !== '') {
+    if (playerName !== '' && betValue !== undefined && opposingTeam !== '') {
       setPlayerQueryObject({
         playerName: playerName,
-        opponent: opponent,
-        points: points,
-        assists: assists,
-        rebounds: rebounds,
-        par: par,
+        opposingTeam: opposingTeam,
+        betValue: betValue,
       });
-    }
 
-    console.log(data);
+      const teamObject = TeamList.find(
+        (team) => team.full_name === opposingTeam
+      );
+
+      dispatch(
+        setBetDetails({
+          betCategory: category,
+          betValue: betValue,
+          opposingTeam: teamObject,
+        })
+      );
+    }
   };
 
   useEffect(() => {
-    if (formState.isSubmitSuccessful) {
-      reset({
-        playerName: '',
-        opponent: '',
-        points: undefined,
-        assists: undefined,
-        rebounds: undefined,
-        par: undefined,
-      });
+    if (
+      Object.values(playerQueryObject).every(
+        (value) => value !== '' && value !== undefined
+      )
+    ) {
+      const fetchData = async () => {
+        const playerInfo = await fetch(
+          `https://www.balldontlie.io/api/v1/players/?search=${playerQueryObject.playerName}`
+        ).then((res) => res.json());
+
+        const gameStats = await fetch(
+          `https://www.balldontlie.io/api/v1/stats?player_ids[]=${
+            playerInfo.data[0].id
+          }&seasons[]=${2022}&per_page=100`
+        ).then((res) => res.json());
+
+        const gameStatsData: PickerProps[] = gameStats.data.sort(
+          (a: PickerProps, b: PickerProps) => {
+            const dateA: number = Date.parse(a.game.date);
+            const dateB: number = Date.parse(b.game.date);
+
+            return dateB - dateA;
+          }
+        );
+
+        dispatch(addStats(gameStatsData));
+      };
+
+      fetchData().catch(console.error);
     }
-  }, [formState, reset]);
-
-  // Need new logic here to store all games from current season
-  // useEffect(() => {
-  //   if (
-  //     playerQueryObject.playerName !== '' &&
-  //     playerQueryObject.season !== undefined
-  //   ) {
-  //     const fetchData = async () => {
-  //       const playerInfo = await fetch(
-  //         `https://www.balldontlie.io/api/v1/players/?search=${playerQueryObject.playerName}`
-  //       ).then((res) => res.json());
-
-  //       const statsInfo = await fetch(
-  //         `https://www.balldontlie.io/api/v1/season_averages?player_ids[]=${playerInfo.data[0].id}&season=${playerQueryObject.season}`
-  //       ).then((res) => res.json());
-
-  //       dispatch(
-  //         addPlayer({
-  //           id: playerInfo.data[0].id,
-  //           firstName: playerInfo.data[0].first_name,
-  //           lastName: playerInfo.data[0].last_name,
-  //           team: playerInfo.data[0].team.abbreviation,
-
-  //           games_played: statsInfo.data[0].games_played,
-  //           season: statsInfo.data[0].season,
-  //           min: statsInfo.data[0].min,
-  //           fgm: statsInfo.data[0].fgm,
-  //           fga: statsInfo.data[0].fga,
-  //           fg3m: statsInfo.data[0].fg3m,
-  //           fg3a: statsInfo.data[0].fg3a,
-  //           ftm: statsInfo.data[0].ftm,
-  //           fta: statsInfo.data[0].fta,
-  //           oreb: statsInfo.data[0].oreb,
-  //           dreb: statsInfo.data[0].dreb,
-  //           reb: statsInfo.data[0].reb,
-  //           ast: statsInfo.data[0].ast,
-  //           stl: statsInfo.data[0].stl,
-  //           blk: statsInfo.data[0].blk,
-  //           turnover: statsInfo.data[0].turnover,
-  //           pf: statsInfo.data[0].pf,
-  //           pts: statsInfo.data[0].pts,
-  //           fg_pct: statsInfo.data[0].fg_pct,
-  //           fg3_pct: statsInfo.data[0].fg3_pct,
-  //           ft_pct: statsInfo.data[0].ft_pct,
-  //         })
-  //       );
-  //     };
-
-  //     fetchData().catch(console.error);
-  //   }
-  // }, [dispatch, playerQueryObject]);
+  }, [dispatch, playerQueryObject]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -149,14 +124,14 @@ const PicksSearch: React.FC = () => {
 
         <Grid.Col span={6}>
           <Controller
-            name="opponent"
+            name="opposingTeam"
             control={control}
             render={({ field }) => (
               <Autocomplete
-                {...register('opponent', { required: true })}
+                {...register('opposingTeam', { required: true })}
                 icon={<IconKarate stroke={1.5} size={18} />}
                 placeholder="Enter Opponent"
-                data={teamList}
+                data={TeamAutocompleteData}
                 limit={4}
                 {...field}
               />
@@ -175,81 +150,33 @@ const PicksSearch: React.FC = () => {
           />
         </Grid.Col>
 
-        {category === 'Points' ? (
-          <Grid.Col span={5}>
-            <Controller
-              name="points"
-              control={control}
-              render={({ field }) => (
-                <NumberInput
-                  icon={<IconHexagonLetterP stroke={1.5} size={18} />}
-                  placeholder="Points"
-                  precision={1}
-                  step={0.5}
-                  stepHoldDelay={500}
-                  stepHoldInterval={100}
-                  {...field}
-                />
-              )}
-            />
-          </Grid.Col>
-        ) : category === 'Assists' ? (
-          <Grid.Col span={5}>
-            <Controller
-              name="assists"
-              control={control}
-              render={({ field }) => (
-                <NumberInput
-                  icon={<IconHexagonLetterA stroke={1.5} size={18} />}
-                  placeholder="Assists"
-                  precision={1}
-                  step={0.5}
-                  stepHoldDelay={500}
-                  stepHoldInterval={100}
-                  {...field}
-                />
-              )}
-            />
-          </Grid.Col>
-        ) : category === 'Rebounds' ? (
-          <Grid.Col span={5}>
-            <Controller
-              name="rebounds"
-              control={control}
-              render={({ field }) => (
-                <NumberInput
-                  icon={<IconHexagonLetterR stroke={1.5} size={18} />}
-                  placeholder="Rebounds"
-                  precision={1}
-                  step={0.5}
-                  stepHoldDelay={500}
-                  stepHoldInterval={100}
-                  {...field}
-                />
-              )}
-            />
-          </Grid.Col>
-        ) : category === 'Pts + Asts + Rebs' ? (
-          <Grid.Col span={5}>
-            <Controller
-              name="par"
-              control={control}
-              render={({ field }) => (
-                <NumberInput
-                  icon={<IconChartRadar stroke={1.5} size={18} />}
-                  placeholder="Pts + Asts + Rebs"
-                  precision={1}
-                  step={0.5}
-                  stepHoldDelay={500}
-                  stepHoldInterval={100}
-                  {...field}
-                />
-              )}
-            />
-          </Grid.Col>
-        ) : (
-          <></>
-        )}
+        <Grid.Col span={5}>
+          <Controller
+            name="betValue"
+            control={control}
+            render={({ field }) => (
+              <NumberInput
+                icon={
+                  category === 'Points' ? (
+                    <IconHexagonLetterP stroke={1.5} size={18} />
+                  ) : category === 'Assists' ? (
+                    <IconHexagonLetterA stroke={1.5} size={18} />
+                  ) : category === 'Rebounds' ? (
+                    <IconHexagonLetterR stroke={1.5} size={18} />
+                  ) : (
+                    <IconChartRadar stroke={1.5} size={18} />
+                  )
+                }
+                placeholder={category}
+                precision={1}
+                step={0.5}
+                stepHoldDelay={500}
+                stepHoldInterval={100}
+                {...field}
+              />
+            )}
+          />
+        </Grid.Col>
 
         <Grid.Col span={1}>
           <ActionIcon color="green" radius="sm" variant="light" type="submit">

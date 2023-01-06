@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import pickerSlice from './reducers/pickerSlice';
 import playerSlice from './reducers/playerSlice';
 import uiSlice from './reducers/uiSlice';
 
 export const store = configureStore({
   reducer: {
-    playerSlice,
     uiSlice,
+    playerSlice,
+    pickerSlice,
   },
 });
 

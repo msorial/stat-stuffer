@@ -1,56 +1,58 @@
 import React from 'react';
-import { Badge, Center, Grid, Loader, Stack, Text } from '@mantine/core';
+import { Flex, Grid, Text } from '@mantine/core';
+import { useSelector } from 'react-redux';
+import { PickerProps, selectPlayerStats } from '../../app/reducers/pickerSlice';
 import PageHeader from '../../components/Dashboard/PageHeader/PageHeader';
 import PicksSearch from '../../components/Dashboard/PicksSearch';
-import { TeamColors } from '../../lib/constants/TeamColors';
-import { TeamLogos } from '../../lib/constants/TeamLogos';
+import PicksTag from '../../components/Dashboard/PicksTag';
+import BeginSearch from '../../components/Reusable/BeginSearch';
+import GameLogs from '../../components/Visualizations/PrizePicks/GameLogs';
+import HitStreak from '../../components/Visualizations/PrizePicks/HitStreak';
+import { PrizePickVisualizations } from '../../components/Visualizations/PrizePicks/PrizePickVisualizations';
 
-const AvgOverviewDashboard: React.FC = () => {
+const PrizePicksDashboard: React.FC = () => {
+  const pickPlayerGames: PickerProps[] = useSelector(selectPlayerStats);
+
   return (
-    <Grid grow sx={{ height: '100%' }}>
-      <Grid.Col span={12}>
-        <PageHeader
-          pageTitle={'Prize Picker'}
-          search={<PicksSearch />}
-          dashboard="prize-picker"
-          prizePicksPlayer={
-            <Badge
-              // key={player.id}
-              variant="filled"
-              leftSection={TeamLogos[1].logo}
-              // rightSection={
-              //   <CloseOutlined onClick={() => handleDeletePlayer(player.id)} />
-              // }
-              sx={{
-                backgroundColor: `${TeamColors[1].primaryColor}80`,
-                color: `${TeamColors[1].secondaryColor}`,
-                borderColor: `${TeamColors[1].primaryColor}`,
-              }}
-            >
-              <Text sx={{ fontSize: '11px' }}>Trae Young</Text>
-            </Badge>
-          }
-        />
-      </Grid.Col>
+    <Flex align="stretch" direction="column" gap="lg" sx={{ height: '100%' }}>
+      <PageHeader
+        pageTitle={'Prize Picker'}
+        search={<PicksSearch />}
+        dashboard="prize-picker"
+        prizePicksPlayer={<PicksTag />}
+      />
 
-      <Grid.Col span={12}>
-        <Center sx={{ width: '100%', flex: 1 }}>
-          <Stack justify="center" align="center">
-            <Loader size="lg" variant="dots" color="red" />
+      {pickPlayerGames.length === 0 ? (
+        <BeginSearch />
+      ) : (
+        <Grid gutter="md">
+          {PrizePickVisualizations.map((viz) => {
+            return (
+              <Grid.Col lg={4} md={6} sm={6} xs={12} key={viz.key}>
+                {viz.viz}
+              </Grid.Col>
+            );
+          })}
+          <Grid.Col lg={4} md={12} sm={12} xs={12}>
+            <HitStreak />
+          </Grid.Col>
+          <Grid.Col span={12} sx={{ padding: '10px 5px 0px' }}>
             <Text
-              variant="gradient"
-              gradient={{ from: '#ff8a00', to: '#da1b60', deg: 45 }}
-              sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
-              size="xl"
-              weight={700}
+              color="dimmed"
+              size="md"
+              transform="uppercase"
+              sx={{ marginLeft: '10px' }}
             >
-              Coming soon!
+              Game Logs
             </Text>
-          </Stack>
-        </Center>
-      </Grid.Col>
-    </Grid>
+          </Grid.Col>
+          <Grid.Col span={12}>
+            <GameLogs />
+          </Grid.Col>
+        </Grid>
+      )}
+    </Flex>
   );
 };
 
-export default AvgOverviewDashboard;
+export default PrizePicksDashboard;

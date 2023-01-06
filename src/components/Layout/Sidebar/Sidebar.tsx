@@ -14,7 +14,7 @@ const Sidebar: React.FC = () => {
         <Logo />
       </Center>
 
-      <Navbar.Section grow mt={20}>
+      <Navbar.Section grow my={20}>
         <Stack justify="center" align="center" spacing="md">
           {menuItems.map((item) => {
             return (

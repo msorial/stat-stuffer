@@ -4,7 +4,7 @@ import { Autocomplete, Input, ActionIcon, Flex } from '@mantine/core';
 import { IconCalendar, IconShirtSport } from '@tabler/icons';
 import { useForm, Controller } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { addPlayer } from '../../../app/reducers/playerSlice';
+import { addPlayer, PlayerProps } from '../../../app/reducers/playerSlice';
 import { playerList } from '../../../lib/constants/PlayerList';
 
 interface PlayerQueryObjectProps {
@@ -23,7 +23,7 @@ const PlayerSearch: React.FC = () => {
     defaultValues: playerQueryObject,
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: PlayerQueryObjectProps) => {
     const playerNameInput = data.playerName;
     const seasonInput = data.season;
 
@@ -51,9 +51,11 @@ const PlayerSearch: React.FC = () => {
           `https://www.balldontlie.io/api/v1/players/?search=${playerQueryObject.playerName}`
         ).then((res) => res.json());
 
-        const statsInfo = await fetch(
+        const playerAverages = await fetch(
           `https://www.balldontlie.io/api/v1/season_averages?player_ids[]=${playerInfo.data[0].id}&season=${playerQueryObject.season}`
         ).then((res) => res.json());
+
+        const playerAveragesData: PlayerProps = playerAverages.data[0];
 
         dispatch(
           addPlayer({
@@ -62,27 +64,27 @@ const PlayerSearch: React.FC = () => {
             lastName: playerInfo.data[0].last_name,
             team: playerInfo.data[0].team.abbreviation,
 
-            games_played: statsInfo.data[0].games_played,
-            season: statsInfo.data[0].season,
-            min: statsInfo.data[0].min,
-            fgm: statsInfo.data[0].fgm,
-            fga: statsInfo.data[0].fga,
-            fg3m: statsInfo.data[0].fg3m,
-            fg3a: statsInfo.data[0].fg3a,
-            ftm: statsInfo.data[0].ftm,
-            fta: statsInfo.data[0].fta,
-            oreb: statsInfo.data[0].oreb,
-            dreb: statsInfo.data[0].dreb,
-            reb: statsInfo.data[0].reb,
-            ast: statsInfo.data[0].ast,
-            stl: statsInfo.data[0].stl,
-            blk: statsInfo.data[0].blk,
-            turnover: statsInfo.data[0].turnover,
-            pf: statsInfo.data[0].pf,
-            pts: statsInfo.data[0].pts,
-            fg_pct: statsInfo.data[0].fg_pct,
-            fg3_pct: statsInfo.data[0].fg3_pct,
-            ft_pct: statsInfo.data[0].ft_pct,
+            games_played: playerAveragesData.games_played,
+            season: playerAveragesData.season,
+            min: playerAveragesData.min,
+            fgm: playerAveragesData.fgm,
+            fga: playerAveragesData.fga,
+            fg3m: playerAveragesData.fg3m,
+            fg3a: playerAveragesData.fg3a,
+            ftm: playerAveragesData.ftm,
+            fta: playerAveragesData.fta,
+            oreb: playerAveragesData.oreb,
+            dreb: playerAveragesData.dreb,
+            reb: playerAveragesData.reb,
+            ast: playerAveragesData.ast,
+            stl: playerAveragesData.stl,
+            blk: playerAveragesData.blk,
+            turnover: playerAveragesData.turnover,
+            pf: playerAveragesData.pf,
+            pts: playerAveragesData.pts,
+            fg_pct: playerAveragesData.fg_pct,
+            fg3_pct: playerAveragesData.fg3_pct,
+            ft_pct: playerAveragesData.ft_pct,
           })
         );
       };
