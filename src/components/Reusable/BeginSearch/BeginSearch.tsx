@@ -11,8 +11,8 @@ const BeginSearch: React.FC = () => {
       sx={{ height: '100%', textAlign: 'center' }}
     >
       <Text size={42}>🔎</Text>
-      <Title size={32} weight={700}>
-        Search for Prop from PrizePicks
+      <Title size={32} weight={700} color="dimmed">
+        Search for Prop
       </Title>
     </Flex>
   );
