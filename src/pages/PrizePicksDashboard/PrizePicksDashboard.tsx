@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Grid, Paper, Stack, useMantineTheme } from '@mantine/core';
+import { Flex, Grid, Paper, Stack } from '@mantine/core';
 import { useSelector } from 'react-redux';
 import { PickerProps, selectPlayerStats } from '../../app/reducers/pickerSlice';
 import PageHeader from '../../components/Dashboard/PageHeader/PageHeader';
@@ -10,7 +10,6 @@ import HitStreak from '../../components/Visualizations/PrizePicks/HitStreak';
 import { PrizePickVisualizations } from '../../components/Visualizations/PrizePicks/PrizePickVisualizations';
 
 const PrizePicksDashboard: React.FC = () => {
-  const theme = useMantineTheme();
   const pickPlayerGames: PickerProps[] = useSelector(selectPlayerStats);
 
   return (
