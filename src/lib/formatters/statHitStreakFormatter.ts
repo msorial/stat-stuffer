@@ -6,7 +6,7 @@ const statHitStreakFormatter = (
 ): number => {
   let streak = 0;
 
-  for (let i = gameStats.length - 1; i >= 0; i--) {
+  for (let i = 0; i < gameStats.length; i++) {
     const game = gameStats[i];
 
     if (betDetails.betCategory === 'Points') {

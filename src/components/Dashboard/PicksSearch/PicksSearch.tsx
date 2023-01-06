@@ -88,7 +88,7 @@ const PicksSearch: React.FC = () => {
             const dateA: number = Date.parse(a.game.date);
             const dateB: number = Date.parse(b.game.date);
 
-            return dateA - dateB;
+            return dateB - dateA;
           }
         );
 
