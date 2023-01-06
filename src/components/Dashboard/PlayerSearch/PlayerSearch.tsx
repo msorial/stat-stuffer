@@ -112,6 +112,7 @@ const PlayerSearch: React.FC = () => {
               placeholder="Search Player"
               data={playerList}
               limit={4}
+              dropdownPosition="bottom"
               {...field}
             />
           )}
