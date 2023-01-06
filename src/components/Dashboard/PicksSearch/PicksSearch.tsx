@@ -70,8 +70,11 @@ const PicksSearch: React.FC = () => {
   };
 
   useEffect(() => {
-    // TODO: add more checks here before exexuting
-    if (playerQueryObject.playerName !== '') {
+    if (
+      Object.values(playerQueryObject).every(
+        (value) => value !== '' && value !== undefined
+      )
+    ) {
       const fetchData = async () => {
         const playerInfo = await fetch(
           `https://www.balldontlie.io/api/v1/players/?search=${playerQueryObject.playerName}`
