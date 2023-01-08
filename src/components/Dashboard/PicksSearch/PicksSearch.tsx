@@ -117,6 +117,11 @@ const PicksSearch: React.FC = () => {
                 data={playerList}
                 limit={4}
                 dropdownPosition="bottom"
+                // rightSection={
+                //   <ThemeIcon size="xs" radius="xl" variant="light" color="gray">
+                //     <IconX />
+                //   </ThemeIcon>
+                // }
                 {...field}
               />
             )}
@@ -134,6 +139,11 @@ const PicksSearch: React.FC = () => {
                 placeholder="Enter Opponent"
                 data={TeamAutocompleteData}
                 limit={4}
+                // rightSection={
+                //   <ThemeIcon size="xs" radius="xl" variant="light" color="gray">
+                //     <IconX />
+                //   </ThemeIcon>
+                // }
                 {...field}
               />
             )}
@@ -173,6 +183,7 @@ const PicksSearch: React.FC = () => {
                 step={0.5}
                 stepHoldDelay={500}
                 stepHoldInterval={100}
+                min={0}
                 {...field}
               />
             )}

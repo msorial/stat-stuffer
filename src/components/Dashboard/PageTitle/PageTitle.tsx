@@ -11,6 +11,7 @@ const PageTitle: React.FC<PageTitleProps> = ({ pageTitle }) => {
       fw={600}
       variant="gradient"
       gradient={{ from: '#ff8a00', to: '#da1b60', deg: 45 }}
+      sx={{ paddingRight: '10px' }}
     >
       {pageTitle}
     </Title>

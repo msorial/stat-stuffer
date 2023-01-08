@@ -25,7 +25,7 @@ const PicksCard: React.FC<PicksCardProps> = ({
 }) => {
   return (
     <Paper withBorder radius="md" p="xs" sx={{ height: '100%' }}>
-      <Group sx={{ height: '100%' }}>
+      <Group noWrap sx={{ height: '100%' }}>
         {type === 'percent' ? (
           <RingProgress
             sections={[{ value: percent, color: color }]}

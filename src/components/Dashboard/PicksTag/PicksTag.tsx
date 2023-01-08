@@ -46,7 +46,7 @@ const PicksTag: React.FC = () => {
       }}
     >
       <Text
-        sx={{ fontSize: '11px' }}
+        sx={{ fontSize: '11px', margin: '0px 3px' }}
       >{`${pickPlayerGames[0].player.first_name} ${pickPlayerGames[0].player.last_name}`}</Text>
     </Badge>
   );

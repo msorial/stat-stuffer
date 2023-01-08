@@ -30,7 +30,7 @@ const HitPercentVsTeam: React.FC = () => {
       percent={
         statHitVsTeamFormatter(pickPlayerGames, betDetails).percentHitVsTeam
       }
-      title={`Hit Percent Versus ${betDetails.opposingTeam?.name}`}
+      title={`Hit Rate Versus ${betDetails.opposingTeam?.name}`}
       subtitle={`${
         statHitVsTeamFormatter(pickPlayerGames, betDetails).statHitVsTeamCount
       }/${

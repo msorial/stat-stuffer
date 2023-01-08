@@ -9,7 +9,7 @@ import { playerList } from '../../../lib/constants/PlayerList';
 
 interface PlayerQueryObjectProps {
   playerName: string | undefined;
-  season: number | string | undefined;
+  season: number | undefined;
 }
 
 const PlayerSearch: React.FC = () => {
@@ -17,7 +17,7 @@ const PlayerSearch: React.FC = () => {
   const [playerQueryObject, setPlayerQueryObject] =
     useState<PlayerQueryObjectProps>({
       playerName: '',
-      season: '',
+      season: undefined,
     });
   const { register, control, handleSubmit, reset, formState } = useForm({
     defaultValues: playerQueryObject,

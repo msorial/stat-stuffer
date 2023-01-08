@@ -28,7 +28,7 @@ const HitPercent: React.FC = () => {
     <PicksCard
       type="percent"
       percent={statHitFormatter(pickPlayerGames, betDetails).percentHit}
-      title="Hit Percent"
+      title="Hit Rate"
       subtitle={`${
         statHitFormatter(pickPlayerGames, betDetails).statHitCount
       }/${statHitFormatter(pickPlayerGames, betDetails).totalGamePlayedCount}`}
