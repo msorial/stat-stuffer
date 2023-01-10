@@ -25,24 +25,11 @@ const AvgOverviewDashboard: React.FC = () => {
         <BeginSearch title="Search for Players" />
       ) : (
         <Grid grow sx={{ height: '100%' }}>
-          <Grid.Col lg={4} md={6} sm={6} xs={12}>
-            <AverageCard />
-          </Grid.Col>
-          <Grid.Col lg={4} md={6} sm={6} xs={12}>
-            <AverageCard />
-          </Grid.Col>
-          <Grid.Col lg={4} md={6} sm={6} xs={12}>
-            <AverageCard />
-          </Grid.Col>
-          <Grid.Col lg={6}>
-            <AverageCard />
-          </Grid.Col>
-          <Grid.Col lg={6}>
-            <AverageCard />
-          </Grid.Col>
-          <Grid.Col lg={12}>
-            <AverageCard />
-          </Grid.Col>
+          <Grid.Col lg={4} md={6} sm={6} xs={12}></Grid.Col>
+          <Grid.Col lg={4} md={6} sm={6} xs={12}></Grid.Col>
+          <Grid.Col lg={4} md={6} sm={6} xs={12}></Grid.Col>
+
+          <Grid.Col lg={12}></Grid.Col>
         </Grid>
       )}
     </Flex>
