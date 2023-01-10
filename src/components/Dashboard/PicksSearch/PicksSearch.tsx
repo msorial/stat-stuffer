@@ -40,10 +40,10 @@ const PicksSearch: React.FC = () => {
       opposingTeam: '',
       betValue: undefined,
     });
+  const [category, setCategory] = useState<string>('Points');
   const { register, control, handleSubmit } = useForm({
     defaultValues: playerQueryObject,
   });
-  const [category, setCategory] = useState<string>('Points');
 
   const onSubmit = (data: PicksQueryObjectProps) => {
     const { playerName, opposingTeam, betValue } = data;

@@ -23,7 +23,7 @@ const PrizePicksDashboard: React.FC = () => {
       />
 
       {pickPlayerGames.length === 0 ? (
-        <BeginSearch />
+        <BeginSearch title="Search for Prop" />
       ) : (
         <Grid gutter="md">
           {PrizePickVisualizations.map((viz) => {
