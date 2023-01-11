@@ -34,7 +34,7 @@ const AverageCard: React.FC<AverageCardProps> = ({
 
   return (
     <Paper withBorder radius="md" sx={{ height: '100%' }}>
-      <Flex direction="column" sx={{ height: '100%' }}>
+      <Flex direction="column" justify="center" sx={{ height: '100%' }}>
         <Flex
           gap="md"
           justify="space-between"
@@ -76,7 +76,7 @@ const AverageCard: React.FC<AverageCardProps> = ({
           </Stack>
         </Flex>
 
-        {playerArray.length > 0 && (
+        {playerArray.length > 1 && (
           <>
             <Divider />
             <ScrollArea
