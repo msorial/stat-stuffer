@@ -63,6 +63,7 @@ const PlayerSearch: React.FC = () => {
             firstName: playerInfo.data[0].first_name,
             lastName: playerInfo.data[0].last_name,
             team: playerInfo.data[0].team.abbreviation,
+            teamId: playerInfo.data[0].team.id,
 
             games_played: playerAveragesData.games_played,
             season: playerAveragesData.season,

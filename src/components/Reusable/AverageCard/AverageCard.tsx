@@ -10,32 +10,31 @@ import {
 } from '@mantine/core';
 import { useSelector } from 'react-redux';
 import { selectPlayers } from '../../../app/reducers/playerSlice';
-import { SmallTeamLogos } from '../../../lib/constants/SmallTeamLogos';
-import { TeamLogos } from '../../../lib/constants/TeamLogos';
-import StandingsRow from '../StandingsRow/StandingsRow';
 
 interface AverageCardProps {
   title: string;
-  logo: ReactElement;
+  playerName: string;
+  teamLogo: ReactElement;
   statValue: number;
   statCategory: string;
-  playerName: string;
   season: number;
+  standings: ReactElement[];
 }
 
 const AverageCard: React.FC<AverageCardProps> = ({
   title,
-  logo,
+  playerName,
+  teamLogo,
   statValue,
   statCategory,
-  playerName,
   season,
+  standings,
 }) => {
   const playerArray = useSelector(selectPlayers);
 
   return (
     <Paper withBorder radius="md" sx={{ height: '100%' }}>
-      <Flex direction="column" justify="space-evenly" sx={{ height: '100%' }}>
+      <Flex direction="column" sx={{ height: '100%' }}>
         <Flex
           gap="md"
           justify="space-between"
@@ -48,7 +47,7 @@ const AverageCard: React.FC<AverageCardProps> = ({
             {title}
           </Text>
 
-          {logo}
+          {teamLogo}
         </Flex>
 
         <Flex
@@ -85,24 +84,7 @@ const AverageCard: React.FC<AverageCardProps> = ({
               scrollbarSize={4}
               scrollHideDelay={500}
             >
-              <StandingsRow
-                stat="27.7 PPG"
-                diff={3.4}
-                player="Luka Doncic - 2019"
-                logo={SmallTeamLogos[27].logo}
-              />
-              <StandingsRow
-                stat="27.7 PPG"
-                diff={3.4}
-                player="Luka Doncic - 2019"
-                logo={SmallTeamLogos[21].logo}
-              />
-              <StandingsRow
-                stat="27.7 PPG"
-                diff={3.4}
-                player="Luka Doncic - 2019"
-                logo={SmallTeamLogos[9].logo}
-              />
+              {standings}
             </ScrollArea>
           </>
         )}

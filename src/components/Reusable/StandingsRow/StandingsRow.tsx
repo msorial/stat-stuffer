@@ -2,17 +2,19 @@ import { ReactElement } from 'react';
 import { Group, Flex, Text, Divider } from '@mantine/core';
 
 interface StandingsRowProps {
-  stat: string;
-  diff: number;
-  player: string;
-  logo: ReactElement;
+  playerName: string;
+  teamLogo: ReactElement;
+  statValue: number;
+  statCategory: string;
+  season: number;
 }
 
 const StandingsRow: React.FC<StandingsRowProps> = ({
-  stat,
-  diff,
-  player,
-  logo,
+  playerName,
+  teamLogo,
+  statValue,
+  statCategory,
+  season,
 }) => {
   return (
     <>
@@ -25,24 +27,14 @@ const StandingsRow: React.FC<StandingsRowProps> = ({
         sx={{ padding: '5px 10px' }}
       >
         <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
-          {stat}
-        </Text>
-
-        <Text
-          color="dimmed"
-          size="xs"
-          transform="uppercase"
-          weight={700}
-          c="blue"
-        >
-          +{diff}
+          {statValue} {statCategory}
         </Text>
 
         <Group spacing={5}>
           <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
-            {player}
+            {playerName} - {season}
           </Text>
-          {logo}
+          {teamLogo}
         </Group>
       </Flex>
       <Divider />
