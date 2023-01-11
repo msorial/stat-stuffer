@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Group, Flex, Text, Divider } from '@mantine/core';
+import { Group, Flex, Text } from '@mantine/core';
 
 interface StandingsRowProps {
   playerName: string;
@@ -7,6 +7,7 @@ interface StandingsRowProps {
   statValue: number;
   statCategory: string;
   season: number;
+  ranking: number;
 }
 
 const StandingsRow: React.FC<StandingsRowProps> = ({
@@ -15,6 +16,7 @@ const StandingsRow: React.FC<StandingsRowProps> = ({
   statValue,
   statCategory,
   season,
+  ranking,
 }) => {
   return (
     <>
@@ -26,18 +28,23 @@ const StandingsRow: React.FC<StandingsRowProps> = ({
         wrap="nowrap"
         sx={{ padding: '5px 10px' }}
       >
-        <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
+        <Text color="#000" size="xs" transform="uppercase" weight={700}>
+          <Text span c="dimmed" sx={{ paddingRight: '5px' }}>
+            {ranking}.
+          </Text>
           {statValue} {statCategory}
         </Text>
 
         <Group spacing={5}>
           <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
-            {playerName} - {season}
+            <Text span c="#000">
+              {playerName}
+            </Text>{' '}
+            - {season}
           </Text>
           {teamLogo}
         </Group>
       </Flex>
-      <Divider />
     </>
   );
 };

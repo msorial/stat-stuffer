@@ -6,35 +6,35 @@ import {
 } from '../../../../app/reducers/playerSlice';
 import { SmallTeamLogos } from '../../../../lib/constants/SmallTeamLogos';
 import { TeamLogos } from '../../../../lib/constants/TeamLogos';
-import pointsLeaderFormatter from '../../../../lib/formatters/pointsLeaderFormatter';
+import reboundsLeaderFormatter from '../../../../lib/formatters/reboundsLeaderFormatter';
 import AverageCard from '../../../Reusable/AverageCard';
 import StandingsRow from '../../../Reusable/StandingsRow/StandingsRow';
 
-const PointsLeader: React.FC = () => {
+const ReboundsLeader: React.FC = () => {
   const pickPlayers: PlayerProps[] = useSelector(selectPlayers);
-  const sortedPtsArray = pointsLeaderFormatter(pickPlayers);
+  const sortedRebArray = reboundsLeaderFormatter(pickPlayers);
 
   return (
     <AverageCard
-      title="Points Leader"
-      playerName={sortedPtsArray[0].playerName}
-      teamLogo={TeamLogos[sortedPtsArray[0].teamId - 1].logo}
-      statValue={sortedPtsArray[0].points}
-      statCategory="PPG"
-      season={sortedPtsArray[0].season}
-      standings={sortedPtsArray.slice(1).map((player, index) => {
+      title="Rebounds Leader"
+      playerName={sortedRebArray[0].playerName}
+      teamLogo={TeamLogos[sortedRebArray[0].teamId - 1].logo}
+      statValue={sortedRebArray[0].rebounds}
+      statCategory="RPG"
+      season={sortedRebArray[0].season}
+      standings={sortedRebArray.slice(1).map((player, index) => {
         return (
           <div key={player.playerName}>
             <StandingsRow
               playerName={player.playerName}
               teamLogo={SmallTeamLogos[player.teamId - 1].logo}
-              statValue={player.points}
-              statCategory="PPG"
+              statValue={player.rebounds}
+              statCategory="RPG"
               season={player.season}
               ranking={index + 2}
             />
 
-            {index !== sortedPtsArray.length - 2 ? <Divider /> : ''}
+            {index !== sortedRebArray.length - 2 ? <Divider /> : ''}
           </div>
         );
       })}
@@ -42,4 +42,4 @@ const PointsLeader: React.FC = () => {
   );
 };
 
-export default PointsLeader;
+export default ReboundsLeader;
