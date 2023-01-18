@@ -10,6 +10,7 @@ export interface PlayerProps {
   firstName: string;
   lastName: string;
   team: string;
+  teamId: number;
   games_played: number;
   season: number;
   min: string;

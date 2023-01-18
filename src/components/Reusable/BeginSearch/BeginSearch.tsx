@@ -1,6 +1,10 @@
 import { Flex, Text, Title } from '@mantine/core';
 
-const BeginSearch: React.FC = () => {
+interface BeginSearchProps {
+  title: string;
+}
+
+const BeginSearch: React.FC<BeginSearchProps> = ({ title }) => {
   return (
     <Flex
       gap="sm"
@@ -12,7 +16,7 @@ const BeginSearch: React.FC = () => {
     >
       <Text size={42}>🔎</Text>
       <Title size={32} weight={700} color="dimmed">
-        Search for Prop
+        {title}
       </Title>
     </Flex>
   );

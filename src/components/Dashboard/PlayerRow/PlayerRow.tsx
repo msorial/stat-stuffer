@@ -33,8 +33,8 @@ const PlayerRow: React.FC = () => {
         <ScrollArea
           scrollbarSize={3}
           scrollHideDelay={500}
-          sx={{ padding: '10px' }}
           type="hover"
+          sx={{ padding: '10px' }}
         >
           <Flex align="center" direction="row" gap="xs">
             {playerArray?.map((player) => {
