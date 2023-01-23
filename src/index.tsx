@@ -1,7 +1,6 @@
 import React from 'react';
 import './index.css';
 import ReactDOMClient from 'react-dom/client';
-import ReactGA from 'react-ga';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
@@ -11,8 +10,6 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOMClient.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
-ReactGA.initialize('G-1CZKRM7B35');
 
 root.render(
   <React.StrictMode>
