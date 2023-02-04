@@ -28,7 +28,7 @@ const StandingsRow: React.FC<StandingsRowProps> = ({
         wrap="nowrap"
         sx={{ padding: '5px 10px' }}
       >
-        <Text color="#000" size="xs" transform="uppercase" weight={700}>
+        <Text size="xs" transform="uppercase" weight={700}>
           <Text span c="dimmed" sx={{ paddingRight: '5px' }}>
             {ranking}.
           </Text>
@@ -36,11 +36,8 @@ const StandingsRow: React.FC<StandingsRowProps> = ({
         </Text>
 
         <Group spacing={5}>
-          <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
-            <Text span c="#000">
-              {playerName}
-            </Text>{' '}
-            - {season}
+          <Text size="xs" transform="uppercase" weight={700}>
+            {playerName} - {season}
           </Text>
           {teamLogo}
         </Group>
