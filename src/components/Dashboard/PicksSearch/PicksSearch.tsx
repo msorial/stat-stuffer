@@ -86,14 +86,14 @@ const PicksSearch: React.FC = () => {
           }&seasons[]=${2022}&per_page=100`
         ).then((res) => res.json());
 
-        const gameStatsData: PickerProps[] = gameStats.data.sort(
-          (a: PickerProps, b: PickerProps) => {
+        const gameStatsData: PickerProps[] = gameStats.data
+          .sort((a: PickerProps, b: PickerProps) => {
             const dateA: number = Date.parse(a.game.date);
             const dateB: number = Date.parse(b.game.date);
 
             return dateB - dateA;
-          }
-        );
+          })
+          .filter((game: PickerProps) => game.min !== '00');
 
         dispatch(addStats(gameStatsData));
       };

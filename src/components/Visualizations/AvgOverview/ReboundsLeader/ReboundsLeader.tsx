@@ -34,7 +34,7 @@ const ReboundsLeader: React.FC = () => {
               ranking={index + 2}
             />
 
-            {index !== sortedRebArray.length - 2 ? <Divider /> : ''}
+            {index !== sortedRebArray.length - 2 && <Divider />}
           </div>
         );
       })}

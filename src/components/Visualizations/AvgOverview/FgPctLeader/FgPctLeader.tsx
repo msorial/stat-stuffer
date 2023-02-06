@@ -34,7 +34,7 @@ const FgPctLeader: React.FC = () => {
               ranking={index + 2}
             />
 
-            {index !== sortedFgPctArray.length - 2 ? <Divider /> : ''}
+            {index !== sortedFgPctArray.length - 2 && <Divider />}
           </div>
         );
       })}
