@@ -34,7 +34,7 @@ const PointsLeader: React.FC = () => {
               ranking={index + 2}
             />
 
-            {index !== sortedPtsArray.length - 2 ? <Divider /> : ''}
+            {index !== sortedPtsArray.length - 2 && <Divider />}
           </div>
         );
       })}

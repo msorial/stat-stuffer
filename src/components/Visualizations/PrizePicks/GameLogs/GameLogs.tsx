@@ -27,164 +27,162 @@ const GameLogs: React.FC = () => {
   return (
     <Paper withBorder radius="md">
       {pickPlayerGames.map((game: PickerProps, index) => {
-        if (game.min !== '00') {
-          const date = new Date(game.game.date);
-          let opposingTeamId: number | undefined = undefined;
-          let hit = false;
+        const date = new Date(game.game.date);
+        let opposingTeamId: number | undefined = undefined;
+        let hit = false;
 
-          if (game.team.id === game.game.home_team_id) {
-            opposingTeamId = game.game.visitor_team_id;
-          } else {
-            opposingTeamId = game.game.home_team_id;
+        if (game.team.id === game.game.home_team_id) {
+          opposingTeamId = game.game.visitor_team_id;
+        } else {
+          opposingTeamId = game.game.home_team_id;
+        }
+
+        if (betDetails.betCategory === 'Points') {
+          if (game.pts > betDetails.betValue) {
+            hit = true;
           }
-
-          if (betDetails.betCategory === 'Points') {
-            if (game.pts > betDetails.betValue) {
-              hit = true;
-            }
-          } else if (betDetails.betCategory === 'Assists') {
-            if (game.ast > betDetails.betValue) {
-              hit = true;
-            }
-          } else if (betDetails.betCategory === 'Rebounds') {
-            if (game.reb > betDetails.betValue) {
-              hit = true;
-            }
-          } else if (betDetails.betCategory === 'Pts + Asts + Rebs') {
-            if (game.pts + game.ast + game.reb > betDetails.betValue) {
-              hit = true;
-            }
+        } else if (betDetails.betCategory === 'Assists') {
+          if (game.ast > betDetails.betValue) {
+            hit = true;
           }
+        } else if (betDetails.betCategory === 'Rebounds') {
+          if (game.reb > betDetails.betValue) {
+            hit = true;
+          }
+        } else if (betDetails.betCategory === 'Pts + Asts + Rebs') {
+          if (game.pts + game.ast + game.reb > betDetails.betValue) {
+            hit = true;
+          }
+        }
 
-          return (
-            <div key={game.id}>
-              <Box
-                sx={{
-                  padding: '20px',
-                  margin: '5px',
-                }}
+        return (
+          <div key={game.id}>
+            <Box
+              sx={{
+                padding: '20px',
+                margin: '5px',
+              }}
+            >
+              <Flex
+                justify="space-between"
+                align="center"
+                direction="row"
+                wrap="wrap"
+                gap="xl"
               >
-                <Flex
-                  justify="space-between"
-                  align="center"
-                  direction="row"
-                  wrap="wrap"
-                  gap="xl"
-                >
-                  <Flex gap="xl" direction="row" wrap="nowrap">
-                    <Stack
-                      align="center"
-                      justify="center"
-                      sx={{ marginRight: '30px' }}
+                <Flex gap="xl" direction="row" wrap="nowrap">
+                  <Stack
+                    align="center"
+                    justify="center"
+                    sx={{ marginRight: '30px' }}
+                  >
+                    <ThemeIcon
+                      radius="xl"
+                      size="lg"
+                      color={hit ? 'green' : 'red'}
                     >
-                      <ThemeIcon
-                        radius="xl"
-                        size="lg"
-                        color={hit ? 'green' : 'red'}
-                      >
-                        {hit ? <IconCheck /> : <IconX />}
-                      </ThemeIcon>
-                    </Stack>
+                      {hit ? <IconCheck /> : <IconX />}
+                    </ThemeIcon>
+                  </Stack>
 
+                  <Stack align="center" spacing="xs">
+                    <Text color="dimmed" size="xs" transform="uppercase">
+                      Game Date
+                    </Text>
+                    <Center sx={{ height: '100%' }}>
+                      <Title weight={700} size="xl">
+                        {date.toLocaleDateString()}
+                      </Title>
+                    </Center>
+                  </Stack>
+
+                  <Stack align="center" spacing="xs">
+                    <Text color="dimmed" size="xs" transform="uppercase">
+                      Opponent
+                    </Text>
+                    <div>{TeamLogos[opposingTeamId - 1].logo}</div>
+                  </Stack>
+                </Flex>
+
+                <ScrollArea
+                  scrollbarSize={3}
+                  scrollHideDelay={500}
+                  sx={{ padding: '10px' }}
+                  type="hover"
+                >
+                  <Flex
+                    gap="xl"
+                    direction="row"
+                    wrap="nowrap"
+                    sx={{ height: '100%' }}
+                  >
                     <Stack align="center" spacing="xs">
                       <Text color="dimmed" size="xs" transform="uppercase">
-                        Game Date
+                        Points
                       </Text>
                       <Center sx={{ height: '100%' }}>
                         <Title weight={700} size="xl">
-                          {date.toLocaleDateString()}
+                          {game.pts}
                         </Title>
                       </Center>
                     </Stack>
 
                     <Stack align="center" spacing="xs">
                       <Text color="dimmed" size="xs" transform="uppercase">
-                        Opponent
+                        Assists
                       </Text>
-                      <div>{TeamLogos[opposingTeamId - 1].logo}</div>
+                      <Center sx={{ height: '100%' }}>
+                        <Title weight={700} size="xl">
+                          {game.ast}
+                        </Title>
+                      </Center>
+                    </Stack>
+
+                    <Stack align="center" spacing="xs">
+                      <Text color="dimmed" size="xs" transform="uppercase">
+                        Rebounds
+                      </Text>
+                      <Center sx={{ height: '100%' }}>
+                        <Title weight={700} size="xl">
+                          {game.reb}
+                        </Title>
+                      </Center>
+                    </Stack>
+
+                    <Stack align="center" spacing="xs">
+                      <Text
+                        color="dimmed"
+                        size="xs"
+                        transform="uppercase"
+                        sx={{ whiteSpace: 'nowrap' }}
+                      >
+                        Pts + Asts + Rebs
+                      </Text>
+                      <Center sx={{ height: '100%' }}>
+                        <Title weight={700} size="xl">
+                          {game.pts + game.ast + game.reb}
+                        </Title>
+                      </Center>
+                    </Stack>
+
+                    <Stack align="center" spacing="xs">
+                      <Text color="dimmed" size="xs" transform="uppercase">
+                        Minutes
+                      </Text>
+                      <Center sx={{ height: '100%' }}>
+                        <Title weight={700} size="xl">
+                          {game.min}
+                        </Title>
+                      </Center>
                     </Stack>
                   </Flex>
+                </ScrollArea>
+              </Flex>
+            </Box>
 
-                  <ScrollArea
-                    scrollbarSize={3}
-                    scrollHideDelay={500}
-                    sx={{ padding: '10px' }}
-                    type="hover"
-                  >
-                    <Flex
-                      gap="xl"
-                      direction="row"
-                      wrap="nowrap"
-                      sx={{ height: '100%' }}
-                    >
-                      <Stack align="center" spacing="xs">
-                        <Text color="dimmed" size="xs" transform="uppercase">
-                          Points
-                        </Text>
-                        <Center sx={{ height: '100%' }}>
-                          <Title weight={700} size="xl">
-                            {game.pts}
-                          </Title>
-                        </Center>
-                      </Stack>
-
-                      <Stack align="center" spacing="xs">
-                        <Text color="dimmed" size="xs" transform="uppercase">
-                          Assists
-                        </Text>
-                        <Center sx={{ height: '100%' }}>
-                          <Title weight={700} size="xl">
-                            {game.ast}
-                          </Title>
-                        </Center>
-                      </Stack>
-
-                      <Stack align="center" spacing="xs">
-                        <Text color="dimmed" size="xs" transform="uppercase">
-                          Rebounds
-                        </Text>
-                        <Center sx={{ height: '100%' }}>
-                          <Title weight={700} size="xl">
-                            {game.reb}
-                          </Title>
-                        </Center>
-                      </Stack>
-
-                      <Stack align="center" spacing="xs">
-                        <Text
-                          color="dimmed"
-                          size="xs"
-                          transform="uppercase"
-                          sx={{ whiteSpace: 'nowrap' }}
-                        >
-                          Pts + Asts + Rebs
-                        </Text>
-                        <Center sx={{ height: '100%' }}>
-                          <Title weight={700} size="xl">
-                            {game.pts + game.ast + game.reb}
-                          </Title>
-                        </Center>
-                      </Stack>
-
-                      <Stack align="center" spacing="xs">
-                        <Text color="dimmed" size="xs" transform="uppercase">
-                          Minutes
-                        </Text>
-                        <Center sx={{ height: '100%' }}>
-                          <Title weight={700} size="xl">
-                            {game.min}
-                          </Title>
-                        </Center>
-                      </Stack>
-                    </Flex>
-                  </ScrollArea>
-                </Flex>
-              </Box>
-
-              {index !== pickPlayerGames.length - 1 ? <Divider /> : ''}
-            </div>
-          );
-        }
+            {index !== pickPlayerGames.length - 1 && <Divider />}
+          </div>
+        );
       })}
     </Paper>
   );
