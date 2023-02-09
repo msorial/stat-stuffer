@@ -1,5 +1,9 @@
 import { ReactNode } from 'react';
-import { FireOutlined, LineChartOutlined } from '@ant-design/icons';
+import {
+  FireOutlined,
+  FundProjectionScreenOutlined,
+  TrophyOutlined,
+} from '@ant-design/icons';
 
 interface MenuItemProps {
   icon: ReactNode;
@@ -10,15 +14,21 @@ interface MenuItemProps {
 
 export const menuItems: MenuItemProps[] = [
   {
-    icon: <LineChartOutlined />,
+    icon: <FundProjectionScreenOutlined />,
     label: 'Average Overview',
     route: '/average-overview',
     description: 'NBA Player Season Averages',
   },
   {
     icon: <FireOutlined />,
-    label: 'Prize Picker',
-    route: '/prize-picker',
-    description: 'Use Data to Win your PrizePicks',
+    label: 'Parlay Picker',
+    route: '/parlay-picker',
+    description: 'Use Data to Win your Parlays',
+  },
+  {
+    icon: <TrophyOutlined />,
+    label: 'AI Picker',
+    route: '/ai-parlays',
+    description: 'AI-Powered Parlays',
   },
 ];

@@ -6,14 +6,14 @@ import PageTitle from '../PageTitle';
 interface PageHeaderProps {
   pageTitle: string;
   search?: ReactNode;
-  prizePicksPlayer?: ReactNode;
-  dashboard?: 'average-overview' | 'prize-picker';
+  parlayPickerPlayer?: ReactNode;
+  dashboard?: 'average-overview' | 'parlay-picker' | 'ai-parlays';
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({
   pageTitle,
   search,
-  prizePicksPlayer,
+  parlayPickerPlayer,
   dashboard,
 }) => {
   const isSmall = useMediaQuery('(max-width: 1247px)');
@@ -26,7 +26,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
       gap="lg"
       sx={{ width: '100%', padding: '10px 5px 0px' }}
     >
-      {dashboard === 'prize-picker' ? (
+      {dashboard === 'parlay-picker' ? (
         <Flex
           direction={isSmall ? 'row' : 'column'}
           justify={isSmall ? 'space-between' : 'space-around'}
@@ -35,7 +35,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
         >
           <PageTitle pageTitle={pageTitle} />
 
-          {prizePicksPlayer}
+          {parlayPickerPlayer}
         </Flex>
       ) : (
         <PageTitle pageTitle={pageTitle} />

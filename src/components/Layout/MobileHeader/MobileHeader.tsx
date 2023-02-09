@@ -17,16 +17,14 @@ const MobileHeader: React.FC = () => {
   return (
     <Header height={60} p="md" fixed={false}>
       <Flex justify="space-between" align="center" direction="row">
+        <ThemeToggle />
+        <Logo />
         <Burger
           size="sm"
           color={darkMode ? theme.colors.gray[1] : theme.colors.dark[5]}
           opened={sidebarOpen}
           onClick={() => dispatch(toggleSidebar())}
         />
-
-        <Logo />
-
-        <ThemeToggle />
       </Flex>
     </Header>
   );

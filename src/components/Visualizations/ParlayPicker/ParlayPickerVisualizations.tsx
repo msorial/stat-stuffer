@@ -1,7 +1,7 @@
 import HitPercent from './HitPercent';
 import HitPercentVsTeam from './HitPercentVsTeam';
 
-export const PrizePickVisualizations = [
+export const ParlayPickerVisualizations = [
   {
     key: 'hit-percent',
     viz: <HitPercent />,

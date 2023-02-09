@@ -6,27 +6,27 @@ import PageHeader from '../../components/Dashboard/PageHeader/PageHeader';
 import PicksSearch from '../../components/Dashboard/PicksSearch';
 import PicksTag from '../../components/Dashboard/PicksTag';
 import BeginSearch from '../../components/Reusable/BeginSearch';
-import GameLogs from '../../components/Visualizations/PrizePicks/GameLogs';
-import HitStreak from '../../components/Visualizations/PrizePicks/HitStreak';
-import { PrizePickVisualizations } from '../../components/Visualizations/PrizePicks/PrizePickVisualizations';
+import GameLogs from '../../components/Visualizations/ParlayPicker/GameLogs';
+import HitStreak from '../../components/Visualizations/ParlayPicker/HitStreak';
+import { ParlayPickerVisualizations } from '../../components/Visualizations/ParlayPicker/ParlayPickerVisualizations';
 
-const PrizePicksDashboard: React.FC = () => {
+const ParlayPicker: React.FC = () => {
   const pickPlayerGames: PickerProps[] = useSelector(selectPlayerStats);
 
   return (
     <Flex align="stretch" direction="column" gap="lg" sx={{ height: '100%' }}>
       <PageHeader
-        pageTitle={'Prize Picker'}
+        pageTitle={'Parlay Picker'}
         search={<PicksSearch />}
-        dashboard="prize-picker"
-        prizePicksPlayer={<PicksTag />}
+        dashboard="parlay-picker"
+        parlayPickerPlayer={<PicksTag />}
       />
 
       {pickPlayerGames.length === 0 ? (
-        <BeginSearch title="Search for Prop" />
+        <BeginSearch title="Search for Prop" dashboard="parlay-picker" />
       ) : (
         <Grid gutter="md">
-          {PrizePickVisualizations.map((viz) => {
+          {ParlayPickerVisualizations.map((viz) => {
             return (
               <Grid.Col lg={4} md={6} sm={6} xs={12} key={viz.key}>
                 {viz.viz}
@@ -55,4 +55,4 @@ const PrizePicksDashboard: React.FC = () => {
   );
 };
 
-export default PrizePicksDashboard;
+export default ParlayPicker;

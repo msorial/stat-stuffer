@@ -6,12 +6,12 @@ import PageHeader from '../../components/Dashboard/PageHeader/PageHeader';
 import PlayerRow from '../../components/Dashboard/PlayerRow';
 import PlayerSearch from '../../components/Dashboard/PlayerSearch';
 import BeginSearch from '../../components/Reusable/BeginSearch';
-import AssistsLeader from '../../components/Visualizations/AvgOverview/AssistsLeader';
-import FgPctLeader from '../../components/Visualizations/AvgOverview/FgPctLeader';
-import PointsLeader from '../../components/Visualizations/AvgOverview/PointsLeader';
-import ReboundsLeader from '../../components/Visualizations/AvgOverview/ReboundsLeader';
+import AssistsLeader from '../../components/Visualizations/AverageOverview/AssistsLeader';
+import FgPctLeader from '../../components/Visualizations/AverageOverview/FgPctLeader';
+import PointsLeader from '../../components/Visualizations/AverageOverview/PointsLeader';
+import ReboundsLeader from '../../components/Visualizations/AverageOverview/ReboundsLeader';
 
-const AvgOverviewDashboard: React.FC = () => {
+const AverageOverview: React.FC = () => {
   const pickPlayers: PlayerProps[] = useSelector(selectPlayers);
 
   return (
@@ -47,4 +47,4 @@ const AvgOverviewDashboard: React.FC = () => {
   );
 };
 
-export default AvgOverviewDashboard;
+export default AverageOverview;

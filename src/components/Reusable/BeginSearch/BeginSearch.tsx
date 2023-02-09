@@ -1,10 +1,15 @@
-import { Flex, Text, Title } from '@mantine/core';
+import { TrophyOutlined } from '@ant-design/icons';
+import { Button, Flex, Text, Title } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
 
 interface BeginSearchProps {
   title: string;
+  dashboard?: 'average-overview' | 'parlay-picker' | 'ai-parlays';
 }
 
-const BeginSearch: React.FC<BeginSearchProps> = ({ title }) => {
+const BeginSearch: React.FC<BeginSearchProps> = ({ title, dashboard }) => {
+  const navigate = useNavigate();
+
   return (
     <Flex
       gap="sm"
@@ -18,6 +23,18 @@ const BeginSearch: React.FC<BeginSearchProps> = ({ title }) => {
       <Title size={32} weight={700} color="dimmed">
         {title}
       </Title>
+
+      {dashboard === 'parlay-picker' && (
+        <Button
+          variant="outline"
+          color="red"
+          leftIcon={<TrophyOutlined size={18} />}
+          sx={{ padding: '0px 40px' }}
+          onClick={() => navigate('/ai-parlays')}
+        >
+          Best Picks
+        </Button>
+      )}
     </Flex>
   );
 };
