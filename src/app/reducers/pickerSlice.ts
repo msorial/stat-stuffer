@@ -61,14 +61,16 @@ export interface TeamProps {
 }
 
 export interface BetProps {
+  playerName: string;
+  opposingTeam: TeamProps | undefined;
   betCategory: string;
   betValue: number;
-  opposingTeam: TeamProps | undefined;
 }
 
 const initialState: PickerSliceState = {
   playerGameStats: [],
   betDetails: {
+    playerName: '',
     betCategory: 'Points',
     betValue: 0,
     opposingTeam: undefined,
@@ -85,22 +87,24 @@ export const pickerSlice = createSlice({
         playerGameStats: [...action.payload],
       };
     },
-    deleteStats: (state) => {
-      return {
-        ...state,
-        playerGameStats: initialState.playerGameStats,
-      };
-    },
     setBetDetails: (state, action: PayloadAction<BetProps>) => {
       return {
         ...state,
         betDetails: action.payload,
       };
     },
+    deletePickSearch: (state) => {
+      return {
+        ...state,
+        playerGameStats: initialState.playerGameStats,
+        betDetails: initialState.betDetails,
+      };
+    },
   },
 });
 
-export const { addStats, deleteStats, setBetDetails } = pickerSlice.actions;
+export const { addStats, deletePickSearch, setBetDetails } =
+  pickerSlice.actions;
 
 export const selectPlayerStats = (state: RootState) =>
   state.pickerSlice.playerGameStats;

@@ -7,7 +7,7 @@ interface PageHeaderProps {
   pageTitle: string;
   search?: ReactNode;
   parlayPickerPlayer?: ReactNode;
-  dashboard?: 'average-overview' | 'parlay-picker' | 'ai-parlays';
+  dashboard?: 'average-overview' | 'parlay-picker' | 'ai-picks';
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({
@@ -21,6 +21,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   return (
     <Flex
       justify="space-between"
+      align="center"
       direction="row"
       wrap="wrap"
       gap="lg"
@@ -29,9 +30,12 @@ const PageHeader: React.FC<PageHeaderProps> = ({
       {dashboard === 'parlay-picker' ? (
         <Flex
           direction={isSmall ? 'row' : 'column'}
-          justify={isSmall ? 'space-between' : 'space-around'}
+          justify={'space-between'}
           align={isSmall ? 'center' : 'flex-start'}
-          sx={{ width: isSmall ? '100%' : 'auto' }}
+          sx={{
+            width: isSmall ? '100%' : 'auto',
+            height: isSmall ? 'auto' : '80%',
+          }}
         >
           <PageTitle pageTitle={pageTitle} />
 

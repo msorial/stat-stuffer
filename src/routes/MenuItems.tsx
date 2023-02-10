@@ -27,8 +27,8 @@ export const menuItems: MenuItemProps[] = [
   },
   {
     icon: <TrophyOutlined />,
-    label: 'AI Picker',
-    route: '/ai-parlays',
-    description: 'AI-Powered Parlays',
+    label: 'AI Picks',
+    route: '/ai-picks',
+    description: 'AI-Powered Picks',
   },
 ];

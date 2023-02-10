@@ -29,6 +29,7 @@ import { TeamList } from '../../../lib/constants/TeamList';
 interface PicksQueryObjectProps {
   playerName: string;
   opposingTeam: string;
+  betCategory: string;
   betValue: number | undefined;
 }
 
@@ -38,20 +39,22 @@ const PicksSearch: React.FC = () => {
     useState<PicksQueryObjectProps>({
       playerName: '',
       opposingTeam: '',
+      betCategory: 'Points',
       betValue: undefined,
     });
-  const [category, setCategory] = useState<string>('Points');
+
   const { register, control, handleSubmit } = useForm({
     defaultValues: playerQueryObject,
   });
 
   const onSubmit = (data: PicksQueryObjectProps) => {
-    const { playerName, opposingTeam, betValue } = data;
+    const { playerName, opposingTeam, betCategory, betValue } = data;
 
-    if (playerName !== '' && betValue !== undefined && opposingTeam !== '') {
+    if (playerName !== '' && opposingTeam !== '' && betValue !== undefined) {
       setPlayerQueryObject({
         playerName: playerName,
         opposingTeam: opposingTeam,
+        betCategory: betCategory,
         betValue: betValue,
       });
 
@@ -61,9 +64,10 @@ const PicksSearch: React.FC = () => {
 
       dispatch(
         setBetDetails({
-          betCategory: category,
-          betValue: betValue,
+          playerName: playerName,
           opposingTeam: teamObject,
+          betCategory: betCategory,
+          betValue: betValue,
         })
       );
     }
@@ -117,11 +121,6 @@ const PicksSearch: React.FC = () => {
                 data={playerList}
                 limit={4}
                 dropdownPosition="bottom"
-                // rightSection={
-                //   <ThemeIcon size="xs" radius="xl" variant="light" color="gray">
-                //     <IconX />
-                //   </ThemeIcon>
-                // }
                 {...field}
               />
             )}
@@ -139,11 +138,6 @@ const PicksSearch: React.FC = () => {
                 placeholder="Enter Opponent"
                 data={TeamAutocompleteData}
                 limit={4}
-                // rightSection={
-                //   <ThemeIcon size="xs" radius="xl" variant="light" color="gray">
-                //     <IconX />
-                //   </ThemeIcon>
-                // }
                 {...field}
               />
             )}
@@ -155,8 +149,13 @@ const PicksSearch: React.FC = () => {
             placeholder="Prop Category"
             searchable
             nothingFound="No Options"
-            value={category}
-            onChange={(option: string) => setCategory(option)}
+            value={playerQueryObject.betCategory}
+            onChange={(option: string) =>
+              setPlayerQueryObject({
+                ...playerQueryObject,
+                betCategory: option,
+              })
+            }
             data={['Points', 'Assists', 'Rebounds', 'Pts + Asts + Rebs']}
           />
         </Grid.Col>
@@ -168,17 +167,17 @@ const PicksSearch: React.FC = () => {
             render={({ field }) => (
               <NumberInput
                 icon={
-                  category === 'Points' ? (
+                  playerQueryObject.betCategory === 'Points' ? (
                     <IconHexagonLetterP stroke={1.5} size={18} />
-                  ) : category === 'Assists' ? (
+                  ) : playerQueryObject.betCategory === 'Assists' ? (
                     <IconHexagonLetterA stroke={1.5} size={18} />
-                  ) : category === 'Rebounds' ? (
+                  ) : playerQueryObject.betCategory === 'Rebounds' ? (
                     <IconHexagonLetterR stroke={1.5} size={18} />
                   ) : (
                     <IconChartRadar stroke={1.5} size={18} />
                   )
                 }
-                placeholder={category}
+                placeholder={playerQueryObject.betCategory}
                 precision={1}
                 step={0.5}
                 stepHoldDelay={500}

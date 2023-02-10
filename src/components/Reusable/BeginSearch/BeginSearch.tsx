@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 interface BeginSearchProps {
   title: string;
-  dashboard?: 'average-overview' | 'parlay-picker' | 'ai-parlays';
+  dashboard?: 'average-overview' | 'parlay-picker' | 'ai-picks';
 }
 
 const BeginSearch: React.FC<BeginSearchProps> = ({ title, dashboard }) => {
@@ -28,11 +28,11 @@ const BeginSearch: React.FC<BeginSearchProps> = ({ title, dashboard }) => {
         <Button
           variant="outline"
           color="red"
-          leftIcon={<TrophyOutlined size={18} />}
+          leftIcon={<TrophyOutlined />}
           sx={{ padding: '0px 40px' }}
-          onClick={() => navigate('/ai-parlays')}
+          onClick={() => navigate('/ai-picks')}
         >
-          Best Picks
+          AI Picks
         </Button>
       )}
     </Flex>

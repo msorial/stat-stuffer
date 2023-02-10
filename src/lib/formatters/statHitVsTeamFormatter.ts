@@ -48,7 +48,7 @@ const statHitVsTeamFormatter = (
       }
     } else if (betDetails.betCategory === 'Pts + Asts + Rebs') {
       if (
-        game.pts + game.ast + game.reb > betDetails.betValue &&
+        game.pts + game.ast + game.reb > betDetails?.betValue &&
         opposingTeamId === betDetails.opposingTeam?.id
       ) {
         statHitVsTeamCount++;

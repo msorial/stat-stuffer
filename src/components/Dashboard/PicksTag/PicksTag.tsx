@@ -2,7 +2,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import { Badge, Text } from '@mantine/core';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  deleteStats,
+  deletePickSearch,
   PickerProps,
   selectPlayerStats,
 } from '../../../app/reducers/pickerSlice';
@@ -38,7 +38,9 @@ const PicksTag: React.FC = () => {
       key={pickPlayerGames[0].player.id}
       variant="filled"
       leftSection={TeamLogos[teamIndex].logo}
-      rightSection={<CloseOutlined onClick={() => dispatch(deleteStats())} />}
+      rightSection={
+        <CloseOutlined onClick={() => dispatch(deletePickSearch())} />
+      }
       sx={{
         backgroundColor: `${TeamColors[colorIndex].primaryColor}80`,
         color: `${TeamColors[colorIndex].secondaryColor}`,
