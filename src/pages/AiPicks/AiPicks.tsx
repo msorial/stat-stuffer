@@ -4,23 +4,49 @@ import { useSelector } from 'react-redux';
 import { selectColorTheme } from '../../app/reducers/uiSlice';
 import PageHeader from '../../components/Dashboard/PageHeader';
 
-interface PrizePickAPIProps {
-  betCategory: string;
-  betValue: string; // TODO: change in scraper
-  date: string;
-  opposingTeam: string;
+interface PropsInterface {
   playerName: string;
+  playerTeam: string;
+  opposingTeam: string;
+  betCategory: string;
+  betValue: number;
+  date: string;
+  odds: OddsInterface;
+}
+
+interface OddsInterface {
+  aiOdds: number;
+  hitRate: number;
+  teamHitRate: number;
+  streak: number;
+}
+
+interface PrizePickAPIInterface {
+  pts: PropsInterface;
+  rebs: PropsInterface;
+  asts: PropsInterface;
+  pra: PropsInterface;
 }
 
 const AiPicks: React.FC = () => {
   const darkMode: boolean = useSelector(selectColorTheme);
-  const [availableProps, setAvailableProps] = useState<PrizePickAPIProps[]>([]);
+  const [availableProps, setAvailableProps] = useState<PrizePickAPIInterface>();
+  let numOfProps = 0;
 
+  // Need to perform all calculations on backend
   useEffect(() => {
     fetch('https://stat-stuffer-default-rtdb.firebaseio.com/props.json')
       .then((response) => response.json())
       .then((data) => setAvailableProps(data));
   }, []);
+
+  for (const key in availableProps) {
+    numOfProps += availableProps[key].length;
+  }
+
+  useEffect(() => {
+    console.log(availableProps);
+  }, [availableProps]);
 
   return (
     <Flex align="stretch" direction="column" gap="lg" sx={{ height: '100%' }}>
@@ -40,8 +66,8 @@ const AiPicks: React.FC = () => {
               })}
             </Text>
             <Kbd>
-              <Mark color="red" sx={{ padding: '1px' }}>
-                {availableProps.length} Props Available
+              <Mark color="red" sx={{ padding: '1px 5px' }}>
+                {numOfProps} Props Available
               </Mark>
             </Kbd>
           </Stack>
@@ -49,9 +75,8 @@ const AiPicks: React.FC = () => {
         dashboard="ai-picks"
       />
 
-      {availableProps.map((prop: PrizePickAPIProps) => {
-        return <div>{prop.playerName}</div>;
-      })}
+      {/* {availableProps.map((prop: PrizePickAPIProps) => {
+      })} */}
     </Flex>
   );
 };
