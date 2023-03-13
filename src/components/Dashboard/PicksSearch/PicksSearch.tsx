@@ -88,18 +88,21 @@ const PicksSearch: React.FC = () => {
           `https://www.balldontlie.io/api/v1/stats?player_ids[]=${
             playerInfo.data[0].id
           }&seasons[]=${2022}&per_page=100`
-        ).then((res) => res.json());
+        )
+          .then((res) => res.json())
+          .then((game) =>
+            game.data.filter((gameInfo: PickerProps) => gameInfo.min !== '00')
+          )
+          .then((games) => {
+            return games.sort((a: PickerProps, b: PickerProps) => {
+              const dateA = Date.parse(a.game.date);
+              const dateB = Date.parse(b.game.date);
 
-        const gameStatsData: PickerProps[] = gameStats.data
-          .sort((a: PickerProps, b: PickerProps) => {
-            const dateA: number = Date.parse(a.game.date);
-            const dateB: number = Date.parse(b.game.date);
+              return dateB - dateA;
+            });
+          });
 
-            return dateB - dateA;
-          })
-          .filter((game: PickerProps) => game.min !== '00');
-
-        dispatch(addStats(gameStatsData));
+        dispatch(addStats(gameStats));
       };
 
       fetchData().catch(console.error);
