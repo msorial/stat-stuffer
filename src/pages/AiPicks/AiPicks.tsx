@@ -6,6 +6,7 @@ import {
   Divider,
   Flex,
   Kbd,
+  Loader,
   Mark,
   Paper,
   Select,
@@ -108,9 +109,15 @@ const AiPicks: React.FC = () => {
         wrap="wrap"
         sx={{ padding: '10px 5px 0px' }}
       >
-        <Text color="dimmed" size="md" transform="uppercase">
-          {availableProps.length} Props Available
-        </Text>
+        {availableProps.length === 0 ? (
+          <Text color="dimmed" size="md" transform="uppercase">
+            Props Loading ...
+          </Text>
+        ) : (
+          <Text color="dimmed" size="md" transform="uppercase">
+            {availableProps.length} Props Available
+          </Text>
+        )}
 
         <Select
           placeholder="Sort By"
@@ -123,143 +130,149 @@ const AiPicks: React.FC = () => {
         />
       </Flex>
 
-      <Paper withBorder radius="md">
-        {availableProps.map((prop: PropsInterface, index) => {
-          const teamLogo = TeamLogos.find(
-            (logo) => logo.team === prop.playerTeam
-          )?.logo;
-          const oppTeamLogo = TeamLogos.find(
-            (logo) => logo.team === prop.opposingTeam
-          )?.logo;
-          const colorIndex = TeamColors.findIndex(
-            (color: TeamColorsProps) =>
-              color.team === (prop.playerTeam ? prop.playerTeam : 'undefined')
-          );
+      {availableProps.length === 0 ? (
+        <Center sx={{ height: '100%', width: '100%' }}>
+          <Loader color="red" variant="oval" />
+        </Center>
+      ) : (
+        <Paper withBorder radius="md">
+          {availableProps.map((prop: PropsInterface, index) => {
+            const teamLogo = TeamLogos.find(
+              (logo) => logo.team === prop.playerTeam
+            )?.logo;
+            const oppTeamLogo = TeamLogos.find(
+              (logo) => logo.team === prop.opposingTeam
+            )?.logo;
+            const colorIndex = TeamColors.findIndex(
+              (color: TeamColorsProps) =>
+                color.team === (prop.playerTeam ? prop.playerTeam : 'undefined')
+            );
 
-          return (
-            <div key={`${prop.playerName}-${prop.betCategory}`}>
-              <Box
-                sx={{
-                  padding: '20px',
-                  margin: '5px',
-                }}
-              >
-                <Flex
-                  justify={isSmall ? 'center' : 'space-between'}
-                  align="center"
-                  direction={isSmall ? 'column' : 'row'}
-                  wrap="wrap"
-                  gap="xl"
+            return (
+              <div key={`${prop.playerName}-${prop.betCategory}`}>
+                <Box
+                  sx={{
+                    padding: '20px',
+                    margin: '5px',
+                  }}
                 >
-                  <Flex gap={50} direction="row" wrap="nowrap">
-                    <Stack align="center" spacing="xs">
-                      <Text color="dimmed" size="xs" transform="uppercase">
-                        Player
-                      </Text>
-                      <Center sx={{ height: '100%' }}>
-                        <Badge
-                          variant="filled"
-                          leftSection={teamLogo}
-                          sx={{
-                            backgroundColor: `${TeamColors[colorIndex].primaryColor}80`,
-                            color: `${TeamColors[colorIndex].secondaryColor}`,
-                            borderColor: `${TeamColors[colorIndex].primaryColor}`,
-                          }}
-                        >
-                          <Text sx={{ fontSize: '11px' }}>
-                            {prop.playerName}
-                          </Text>
-                        </Badge>
-                      </Center>
-                    </Stack>
-
-                    <Stack align="center" spacing="xs">
-                      <Text color="dimmed" size="xs" transform="uppercase">
-                        Prop
-                      </Text>
-                      <Center sx={{ height: '100%' }}>
-                        <Stack align="center" spacing={0}>
-                          <Title weight={700} size="xl">
-                            {prop.betValue}
-                          </Title>
-                          <Text weight={700} size="sm">
-                            {prop.betCategory}
-                          </Text>
-                        </Stack>
-                      </Center>
-                    </Stack>
-
-                    <Stack align="center" spacing="xs">
-                      <Text color="dimmed" size="xs" transform="uppercase">
-                        Opponent
-                      </Text>
-                      <Center sx={{ height: '100%' }}>{oppTeamLogo}</Center>
-                    </Stack>
-                  </Flex>
-
                   <Flex
+                    justify={isSmall ? 'center' : 'space-between'}
+                    align="center"
+                    direction={isSmall ? 'column' : 'row'}
+                    wrap="wrap"
                     gap="xl"
-                    direction="row"
-                    wrap="nowrap"
-                    sx={{ height: '100%' }}
                   >
-                    <Stack align="center" spacing="xs">
-                      <Text color="dimmed" size="xs" transform="uppercase">
-                        AI
-                      </Text>
-                      <Center sx={{ height: '100%' }}>
-                        <Title weight={700} size="xl">
-                          {prop.odds.aiOdds}
-                        </Title>
-                      </Center>
-                    </Stack>
+                    <Flex gap={50} direction="row" wrap="nowrap">
+                      <Stack align="center" spacing="xs">
+                        <Text color="dimmed" size="xs" transform="uppercase">
+                          Player
+                        </Text>
+                        <Center sx={{ height: '100%' }}>
+                          <Badge
+                            variant="filled"
+                            leftSection={teamLogo}
+                            sx={{
+                              backgroundColor: `${TeamColors[colorIndex].primaryColor}80`,
+                              color: `${TeamColors[colorIndex].secondaryColor}`,
+                              borderColor: `${TeamColors[colorIndex].primaryColor}`,
+                            }}
+                          >
+                            <Text sx={{ fontSize: '11px' }}>
+                              {prop.playerName}
+                            </Text>
+                          </Badge>
+                        </Center>
+                      </Stack>
 
-                    <Stack align="center" spacing="xs">
-                      <Text color="dimmed" size="xs" transform="uppercase">
-                        Hit Rate
-                      </Text>
-                      <Center sx={{ height: '100%' }}>
-                        <Title weight={700} size="xl">
-                          {prop.odds.hitRate}
-                        </Title>
-                      </Center>
-                    </Stack>
+                      <Stack align="center" spacing="xs">
+                        <Text color="dimmed" size="xs" transform="uppercase">
+                          Prop
+                        </Text>
+                        <Center sx={{ height: '100%' }}>
+                          <Stack align="center" spacing={0}>
+                            <Title weight={700} size="xl">
+                              {prop.betValue}
+                            </Title>
+                            <Text weight={700} size="sm">
+                              {prop.betCategory}
+                            </Text>
+                          </Stack>
+                        </Center>
+                      </Stack>
 
-                    <Stack align="center" spacing="xs">
-                      <Text color="dimmed" size="xs" transform="uppercase">
-                        Team Hit Rate
-                      </Text>
-                      <Center sx={{ height: '100%' }}>
-                        <Title weight={700} size="xl">
-                          {prop.odds.teamHitRate}
-                        </Title>
-                      </Center>
-                    </Stack>
+                      <Stack align="center" spacing="xs">
+                        <Text color="dimmed" size="xs" transform="uppercase">
+                          Opponent
+                        </Text>
+                        <Center sx={{ height: '100%' }}>{oppTeamLogo}</Center>
+                      </Stack>
+                    </Flex>
 
-                    <Stack align="center" spacing="xs">
-                      <Text
-                        color="dimmed"
-                        size="xs"
-                        transform="uppercase"
-                        sx={{ whiteSpace: 'nowrap' }}
-                      >
-                        Streak
-                      </Text>
-                      <Center sx={{ height: '100%' }}>
-                        <Title weight={700} size="xl">
-                          {prop.odds.streak}
-                        </Title>
-                      </Center>
-                    </Stack>
+                    <Flex
+                      gap="xl"
+                      direction="row"
+                      wrap="nowrap"
+                      sx={{ height: '100%' }}
+                    >
+                      <Stack align="center" spacing="xs">
+                        <Text color="dimmed" size="xs" transform="uppercase">
+                          AI
+                        </Text>
+                        <Center sx={{ height: '100%' }}>
+                          <Title weight={700} size="xl">
+                            {prop.odds.aiOdds}
+                          </Title>
+                        </Center>
+                      </Stack>
+
+                      <Stack align="center" spacing="xs">
+                        <Text color="dimmed" size="xs" transform="uppercase">
+                          Hit Rate
+                        </Text>
+                        <Center sx={{ height: '100%' }}>
+                          <Title weight={700} size="xl">
+                            {prop.odds.hitRate}
+                          </Title>
+                        </Center>
+                      </Stack>
+
+                      <Stack align="center" spacing="xs">
+                        <Text color="dimmed" size="xs" transform="uppercase">
+                          Team Hit Rate
+                        </Text>
+                        <Center sx={{ height: '100%' }}>
+                          <Title weight={700} size="xl">
+                            {prop.odds.teamHitRate}
+                          </Title>
+                        </Center>
+                      </Stack>
+
+                      <Stack align="center" spacing="xs">
+                        <Text
+                          color="dimmed"
+                          size="xs"
+                          transform="uppercase"
+                          sx={{ whiteSpace: 'nowrap' }}
+                        >
+                          Streak
+                        </Text>
+                        <Center sx={{ height: '100%' }}>
+                          <Title weight={700} size="xl">
+                            {prop.odds.streak}
+                          </Title>
+                        </Center>
+                      </Stack>
+                    </Flex>
                   </Flex>
-                </Flex>
-              </Box>
+                </Box>
 
-              {index !== availableProps.length - 1 && <Divider />}
-            </div>
-          );
-        })}
-      </Paper>
+                {index !== availableProps.length - 1 && <Divider />}
+              </div>
+            );
+          })}
+        </Paper>
+      )}
     </Flex>
   );
 };
